@@ -19,7 +19,7 @@ public class PlanoDeEnsino {
     private StatusPlano status;
     private int idDisciplina;
     private int idProfessor;
-    private int idUA;
+    private int idUnidadeAcademica;
 
     public PlanoDeEnsino(int idPlanoDeEnsino,int ano,int semestre,String ementa,String objetivoGeral,String objetivoEspecifico,String metodologia,String avaliacao,ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar){
         setId(idPlanoDeEnsino);

@@ -140,4 +140,36 @@ public class PlanoDeEnsino {
     public void setBibliografiaComplementar(ArrayList<String> bibliografiaComplementar) {
         this.bibliografiaComplementar = bibliografiaComplementar;
     }
+
+    public StatusPlano getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPlano status) {
+        this.status = status;
+    }
+
+    public int getIdDisciplina() {
+        return idDisciplina;
+    }
+
+    public void setIdDisciplina(int idDisciplina) {
+        this.idDisciplina = idDisciplina;
+    }
+
+    public int getIdProfessor() {
+        return idProfessor;
+    }
+
+    public void setIdProfessor(int idProfessor) {
+        this.idProfessor = idProfessor;
+    }
+
+    public int getIdUnidadeAcademica() {
+        return idUnidadeAcademica;
+    }
+
+    public void setIdUnidadeAcademica(int idUnidadeAcademica) {
+        this.idUnidadeAcademica = idUnidadeAcademica;
+    }
 }

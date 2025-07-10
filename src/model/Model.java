@@ -116,4 +116,20 @@ public class Model {
             observer.update();
         }
     }
+
+    public boolean adicionarObserver(Observer observer) {
+        if (observer == null) {
+            throw new IllegalArgumentException("Observer não pode ser null");
+        }
+
+        return observers.add(observer);
+    }
+
+    public boolean removerObserver(Observer observer) {
+        if (observer == null) {
+            throw new IllegalArgumentException("Observer não pode ser null");
+        }
+
+        return observers.remove(observer);
+    }
 }

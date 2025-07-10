@@ -119,7 +119,7 @@ public class Model {
 
     public boolean adicionarObserver(Observer observer) {
         if (observer == null) {
-            throw new IllegalArgumentException("Observer não pode ser null");
+            throw new IllegalArgumentException("Observer não pode ser nulo");
         }
 
         return observers.add(observer);
@@ -127,7 +127,7 @@ public class Model {
 
     public boolean removerObserver(Observer observer) {
         if (observer == null) {
-            throw new IllegalArgumentException("Observer não pode ser null");
+            throw new IllegalArgumentException("Observer não pode ser nulo");
         }
 
         return observers.remove(observer);

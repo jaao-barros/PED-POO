@@ -1,9 +1,11 @@
 package model;
 
-import view.Observer;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import view.Observer;
 
 public class Model {
     private List<Coordenacao> coordenacoes;
@@ -12,7 +14,7 @@ public class Model {
     private List<PlanoDeEnsino> planosDeEnsino;
     private List<Professor> professores;
     private List<UnidadeAcademica> unidadesAcademicas;
-    private List<Observer> observers;
+    private Set<Observer> observers;
     private static Model instancia;
 
     private Model() {
@@ -22,7 +24,7 @@ public class Model {
         planosDeEnsino = new ArrayList<>();
         professores = new ArrayList<>();
         unidadesAcademicas = new ArrayList<>();
-        observers = new ArrayList<>();
+        observers = new HashSet<>();
     }
 
     public static Model getInstancia() {

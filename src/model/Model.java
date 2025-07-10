@@ -32,4 +32,10 @@ public class Model {
 
         return instancia;
     }
+
+    public void notificarObservers() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
+    }
 }

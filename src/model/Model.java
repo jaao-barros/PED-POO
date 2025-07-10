@@ -8,6 +8,7 @@ import java.util.Set;
 import view.Observer;
 
 public class Model {
+    private static Model instancia;
     private List<Coordenacao> coordenacoes;
     private List<Curso> cursos;
     private List<Disciplina> disciplinas;
@@ -15,7 +16,6 @@ public class Model {
     private List<Professor> professores;
     private List<UnidadeAcademica> unidadesAcademicas;
     private Set<Observer> observers;
-    private static Model instancia;
 
     private Model() {
         coordenacoes = new ArrayList<>();
@@ -33,6 +33,82 @@ public class Model {
         }
 
         return instancia;
+    }
+
+    public List<Coordenacao> getCoordenacoes() {
+        return coordenacoes;
+    }
+
+    public void setCoordenacoes(List<Coordenacao> coordenacoes) {
+        if (coordenacoes == null) {
+            throw new IllegalArgumentException("Lista de coordenações não pode ser nula");
+        }
+
+        this.coordenacoes = coordenacoes;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        if (cursos == null) {
+            throw new IllegalArgumentException("Lista de cursos não pode ser nula");
+        }
+
+        this.cursos = cursos;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        if (disciplinas == null) {
+            throw new IllegalArgumentException("Lista de disciplinas não pode ser nula");
+        }
+
+        this.disciplinas = disciplinas;
+    }
+
+    public List<PlanoDeEnsino> getPlanosDeEnsino() {
+        return planosDeEnsino;
+    }
+
+    public void setPlanosDeEnsino(List<PlanoDeEnsino> planosDeEnsino) {
+        if (planosDeEnsino == null) {
+            throw new IllegalArgumentException("Lista de planos de ensino não pode ser nula");
+        }
+
+        this.planosDeEnsino = planosDeEnsino;
+    }
+
+    public List<Professor> getProfessores() {
+        return professores;
+    }
+
+    public void setProfessores(List<Professor> professores) {
+        if (professores == null) {
+            throw new IllegalArgumentException("Lista de professores não pode ser nula");
+        }
+
+        this.professores = professores;
+    }
+
+    public List<UnidadeAcademica> getUnidadesAcademicas() {
+        return unidadesAcademicas;
+    }
+
+    public void setUnidadesAcademicas(List<UnidadeAcademica> unidadesAcademicas) {
+        if (unidadesAcademicas == null) {
+            throw new IllegalArgumentException("Lista de unidades acadêmicas não pode ser nula");
+        }
+
+        this.unidadesAcademicas = unidadesAcademicas;
+    }
+
+    public Set<Observer> getObservers() {
+        return observers;
     }
 
     public void notificarObservers() {

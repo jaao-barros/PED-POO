@@ -9,13 +9,13 @@ import view.Observer;
 
 public class Model {
     private static Model instancia;
-    private List<Coordenacao> coordenacoes;
-    private List<Curso> cursos;
-    private List<Disciplina> disciplinas;
-    private List<PlanoDeEnsino> planosDeEnsino;
-    private List<Professor> professores;
-    private List<UnidadeAcademica> unidadesAcademicas;
-    private Set<Observer> observers;
+    private final List<Coordenacao> coordenacoes;
+    private final List<Curso> cursos;
+    private final List<Disciplina> disciplinas;
+    private final List<PlanoDeEnsino> planosDeEnsino;
+    private final List<Professor> professores;
+    private final List<UnidadeAcademica> unidadesAcademicas;
+    private final Set<Observer> observers;
 
     private Model() {
         coordenacoes = new ArrayList<>();

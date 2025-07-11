@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-class Coordenacao {
+public class Coordenacao {
     private int idCoordenacao;
     private int idCurso;
     private int idProfessorCoordenador;

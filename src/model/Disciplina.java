@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-class Disciplina {
+public class Disciplina {
     private int idDisciplina;
     private String nome;
     private String codigoDisciplina;

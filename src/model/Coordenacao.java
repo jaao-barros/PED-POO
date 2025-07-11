@@ -10,14 +10,17 @@ public class Coordenacao {
     private LocalDateTime inicioGestao;
     private LocalDateTime fimGestao;
 
-    public Coordenacao(int idCoordenacao,int idCurso,int idProfessorCoordenador){
+    public Coordenacao() {
+        super();
+    }
+
+    public Coordenacao(int idCoordenacao, int idCurso, int idProfessorCoordenador){
         setIdCoordenacao(idCoordenacao);
         setIdCurso(idCurso);
         setIdProfessorCoordenador(idProfessorCoordenador);
         setInicioGestao(inicioGestao);
         setFimGestao(fimGestao);
     }
-
 
     public int getIdCoordenacao() {
         return idCoordenacao;

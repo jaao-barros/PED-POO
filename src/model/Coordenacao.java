@@ -14,7 +14,7 @@ public class Coordenacao {
         super();
     }
 
-    public Coordenacao(int idCoordenacao, int idCurso, int idProfessorCoordenador){
+    public Coordenacao(int idCoordenacao, int idCurso, int idProfessorCoordenador, LocalDateTime inicioGestao, LocalDateTime fimGestao) {
         setIdCoordenacao(idCoordenacao);
         setIdCurso(idCurso);
         setIdProfessorCoordenador(idProfessorCoordenador);

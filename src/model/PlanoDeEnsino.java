@@ -21,7 +21,11 @@ public class PlanoDeEnsino {
     private int idProfessor;
     private int idUnidadeAcademica;
 
-    public PlanoDeEnsino(int idPlanoDeEnsino,int ano,int semestre,String ementa,String objetivoGeral,String objetivoEspecifico,String metodologia,String avaliacao,ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar){
+    public PlanoDeEnsino() {
+        super();
+    }
+
+    public PlanoDeEnsino(int idPlanoDeEnsino, int ano, int semestre, String ementa, String objetivoGeral, String objetivoEspecifico, String metodologia, String avaliacao, ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar){
         setId(idPlanoDeEnsino);
         setAno(ano);
         setSemestre(semestre);

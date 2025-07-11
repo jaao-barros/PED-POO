@@ -75,12 +75,18 @@ public class Model {
         }
 
         coordenacoes.put(idCoordenacao, coordenacao);
+        notificarObservers();
 
         return true;
     }
 
     public boolean removerCoordenacao(int idCoordenacao) {
-        return coordenacoes.remove(idCoordenacao) != null;
+        if (coordenacoes.remove(idCoordenacao) != null) {
+            notificarObservers();
+            return true;
+        }
+
+        return false;
     }
 
     public Coordenacao buscarCoordenacaoPorId(int idCoordenacao) {
@@ -99,12 +105,18 @@ public class Model {
         }
 
         cursos.put(idCurso, curso);
+        notificarObservers();
 
         return true;
     }
 
     public boolean removerCurso(int idCurso) {
-        return cursos.remove(idCurso) != null;
+        if (cursos.remove(idCurso) != null) {
+            notificarObservers();
+            return true;
+        }
+
+        return false;
     }
 
     public Curso buscarCursoPorId(int idCurso) {
@@ -123,12 +135,19 @@ public class Model {
         }
 
         disciplinas.put(id, disciplina);
+        notificarObservers();
 
         return true;
     }
 
     public boolean removerDisciplina(int idDisciplina) {
-        return disciplinas.remove(idDisciplina) != null;
+        if (disciplinas.remove(idDisciplina) != null) {
+            notificarObservers();
+            return true;
+        }
+
+        return false;
+
     }
 
     public Disciplina buscarDisciplinaPorId(int idDisciplina) {
@@ -147,12 +166,18 @@ public class Model {
         }
 
         planosDeEnsino.put(id, plano);
+        notificarObservers();
 
         return true;
     }
 
     public boolean removerPlanoDeEnsino(int idPlano) {
-        return planosDeEnsino.remove(idPlano) != null;
+        if (planosDeEnsino.remove(idPlano) != null) {
+            notificarObservers();
+            return true;
+        }
+
+        return false;
     }
 
     public PlanoDeEnsino buscarPlanoDeEnsinoPorId(int idPlano) {
@@ -171,12 +196,18 @@ public class Model {
         }
 
         professores.put(id, professor);
+        notificarObservers();
 
         return true;
     }
 
     public boolean removerProfessor(int idProfessor) {
-        return professores.remove(idProfessor) != null;
+        if (professores.remove(idProfessor) != null) {
+            notificarObservers();
+            return true;
+        }
+
+        return false;
     }
 
     public Professor buscarProfessorPorId(int idProfessor) {
@@ -195,12 +226,18 @@ public class Model {
         }
 
         unidadesAcademicas.put(id, unidade);
+        notificarObservers();
 
         return true;
     }
 
     public boolean removerUnidadeAcademica(int idUnidade) {
-        return unidadesAcademicas.remove(idUnidade) != null;
+        if (unidadesAcademicas.remove(idUnidade) != null) {
+            notificarObservers();
+            return true;
+        }
+
+        return false;
     }
 
     public UnidadeAcademica buscarUnidadeAcademicaPorId(int idUnidade) {

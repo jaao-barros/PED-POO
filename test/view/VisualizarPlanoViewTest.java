@@ -9,7 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class VisualizarPlanoViewTest {
-    public static void main(String[] args) {
+     private ModelTest modelTest;
+    private VisualizarPlanoController controller;
+    public VisualizarPlanoViewTest(ModelTest model, VisualizarPlanoController controller) {
+        this.controller = controller;
+        this.model = model;
+    }
+
+    public void main(String[] args) {
         // Redirecionar saída padrão
         PrintStream originalOut = System.out;
         ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -51,7 +58,6 @@ public class VisualizarPlanoViewTest {
         model.adicionarUnidadeAcademica(unidade);
         model.adicionarProfessor(professor);
 
-        VisualizarPlanoController controller = new VisualizarPlanoController(model);
 
         // Criar view e injetar plano
         VisualizarPlanoView view = new VisualizarPlanoView(controller);

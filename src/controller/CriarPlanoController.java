@@ -1,17 +1,18 @@
 package controller;
-import jdk.jshell.Snippet;
 import model.*;
+import view.VisualizarPlanoView;
+
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
-public class PlanoEnsinoController {
+public class CriarPlanoController {
     private final Model model;
-
-    public PlanoEnsinoController(Model model) {
+    private  final VisualizarPlanoView view;
+    public CriarPlanoController(Model model, VisualizarPlanoView view) {
+        this.view = view;
         this.model = Model.getInstancia();
     }
-
-    // colocar os metodos q a view vai chamar, dps de ter a entrada de dados do usuario (se formos usar terminal ou swing, nun sei)
 
    public boolean criarPlanoEnsino(int id, int ano, int semestre, String ementa, String objGeral,
                                    String objEspecifico, String metodologia, String avaliacao,
@@ -32,7 +33,7 @@ public class PlanoEnsinoController {
 
        novoPlano.setStatus(StatusPlano.PENDENTE);
        novoPlano.setDataCriacao(LocalDateTime.now());
-       novoPlano.setDataUltimaModificacao(LocalDateTime.now(LocalDateTime.now()));
+       novoPlano.setDataUltimaModificacao(LocalDateTime.now(ZoneId.from(LocalDateTime.now())));
 
        return model.adicionarPlanoDeEnsino(novoPlano);
 

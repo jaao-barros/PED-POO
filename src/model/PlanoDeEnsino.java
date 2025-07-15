@@ -7,6 +7,7 @@ public class PlanoDeEnsino {
     private int idPlanoDeEnsino;
     private int ano;
     private int semestre;
+    private String justificativa;
     private String ementa;
     private String objetivoGeral;
     private String objetivoEspecifico;
@@ -17,6 +18,8 @@ public class PlanoDeEnsino {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataUltimaModificacao;
     private StatusPlano status;
+    private boolean isObrigatoria;
+    private int codigoCurso;
     private int idDisciplina;
     private int idProfessor;
     private int idUnidadeAcademica;
@@ -89,6 +92,14 @@ public class PlanoDeEnsino {
         this.semestre = semestre;
     }
 
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
+    }
+
     public String getEmenta() {
         return ementa;
     }
@@ -151,6 +162,22 @@ public class PlanoDeEnsino {
 
     public void setStatus(StatusPlano status) {
         this.status = status;
+    }
+
+    public boolean getIsObrigatoria() {
+        return isObrigatoria;
+    }
+
+    public void setIsObrigatoria(boolean isObrigatoria) {
+        this.isObrigatoria = isObrigatoria;
+    }
+
+    public int getCodigoCurso() {
+        return codigoCurso;
+    }
+
+    public void setCodigoCurso(int codigoCurso) {
+        this.codigoCurso = codigoCurso;
     }
 
     public int getIdDisciplina() {

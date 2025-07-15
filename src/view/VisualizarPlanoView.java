@@ -1,0 +1,97 @@
+package view;
+
+import java.util.List;
+
+import controller.VisualizarPlanoController;
+import model.PlanoDeEnsino;
+
+public class VisualizarPlanoView {
+    private final VisualizarPlanoController controller;
+    private int idPlanoDeEnsino;
+
+    public VisualizarPlanoView(VisualizarPlanoController controller) {
+        this.controller = controller;
+    }
+
+    public VisualizarPlanoController getController() {
+        return controller;
+    }
+
+    public int getIdPlanoDeEnsino() {
+        return idPlanoDeEnsino;
+    }
+
+    public void setIdPlanoDeEnsino(int idPlanoDeEnsino) {
+        this.idPlanoDeEnsino = idPlanoDeEnsino;
+    }
+
+    public void visualizarPlano() {
+        PlanoDeEnsino planoDeEnsino = controller.buscarPlanoDeEnsinoPorId(idPlanoDeEnsino);
+
+        System.out.print("PLANO DE ENSINO DE DISCIPLINA\n\n");
+
+        System.out.printf("Ano/Semestre: %d.%d\n\n", planoDeEnsino.getAno(), planoDeEnsino.getSemestre());
+
+        System.out.println("1. Identificação");
+        System.out.println("    1.1. Unidade: " + controller.getUnidade(planoDeEnsino).getNome());
+        System.out.println("    1.2. Curso: " + controller.getCurso(planoDeEnsino).getNome());
+        System.out.println("    1.3. Nome da Disciplina: " + controller.getDisciplina(planoDeEnsino).getNome());
+        System.out.println("    1.4. Código da Disciplina: " + controller.getDisciplina(planoDeEnsino).getCodigoDisciplina());
+        System.out.printf("    1.5. Caráter da Disciplina: %s\n", planoDeEnsino.getIsObrigatoria() ? "Obrigatória" : "Optativa");
+        System.out.println("    1.6. Carga horária:");
+        System.out.println("        - Total: " + (controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica() + controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica()));
+        System.out.println("        - Teórica: " + controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica());
+        System.out.println("        - Prática: " + controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica());
+        System.out.print("    1.7. Pré-requisitos: ");
+
+        List<Integer> preRequisitos = controller.getDisciplina(planoDeEnsino).getPreRequisitos();
+
+        if (preRequisitos.isEmpty()) {
+            System.out.println("Nenhum");
+        }
+
+        for (int i = 0; i < preRequisitos.size(); i++) {
+            int idPreRequisito = preRequisitos.get(i);
+            System.out.print(controller.getDisciplina(idPreRequisito).getCodigoDisciplina() + " - ");
+            System.out.print(controller.getDisciplina(idPreRequisito).getNome());
+
+            if (i < preRequisitos.size() - 1) {
+                System.out.print(", ");
+            } else {
+                System.out.println();
+            }
+        }
+
+        System.out.println("    1.8. Professor: " + controller.getProfessor(planoDeEnsino).getNome());
+
+        System.out.println("\n2. Justificativa:");
+        System.out.println("    " + planoDeEnsino.getJustificativa());
+
+        System.out.println("\n3. Ementa:");
+        System.out.println("    " + planoDeEnsino.getEmenta());
+
+        System.out.println("\n4. Objetivos:");
+        System.out.println("    4.1. Geral:");
+        System.out.println("        " + planoDeEnsino.getObjetivoGeral());
+        System.out.println("    4.2. Específicos:");
+        System.out.println("        " + planoDeEnsino.getObjetivoEspecifico());
+
+        System.out.println("\n5. Metodologia de ensino:");
+        System.out.println("    " + planoDeEnsino.getMetodologia());
+
+        System.out.println("\n6. Sistema de Avaliação:");
+        System.out.println("    " + planoDeEnsino.getAvaliacao());
+
+        System.out.println("\n7. Bibliografia:");
+
+        System.out.println("    7.1. Bibliografia básica:");
+        for (String material : planoDeEnsino.getBibliografiaBasica()){
+            System.out.println("      - " + material);
+        }
+
+        System.out.println("\n    7.2. Bibliografia complementar:");
+        for (String material : planoDeEnsino.getBibliografiaComplementar()){
+            System.out.println("      - " + material);
+        }
+    }
+}

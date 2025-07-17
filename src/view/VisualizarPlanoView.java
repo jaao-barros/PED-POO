@@ -39,9 +39,9 @@ public class VisualizarPlanoView {
         System.out.println("    1.4. Código da Disciplina: " + controller.getDisciplina(planoDeEnsino).getCodigoDisciplina());
         System.out.printf("    1.5. Caráter da Disciplina: %s\n", planoDeEnsino.getIsObrigatoria() ? "Obrigatória" : "Optativa");
         System.out.println("    1.6. Carga horária:");
-        System.out.println("        - Total: " + (controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica() + controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica()));
-        System.out.println("        - Teórica: " + controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica());
-        System.out.println("        - Prática: " + controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica());
+        System.out.printf("        - Total: %dh\n", controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica() + controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica());
+        System.out.printf("        - Teórica: %dh\n", controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica());
+        System.out.printf("        - Prática: %dh\n", controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica());
         System.out.print("    1.7. Pré-requisitos: ");
 
         List<Integer> preRequisitos = controller.getDisciplina(planoDeEnsino).getPreRequisitos();

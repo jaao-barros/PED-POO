@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+import java.util.Scanner;
 
 import controller.VisualizarPlanoController;
 import model.PlanoDeEnsino;
@@ -93,5 +94,10 @@ public class VisualizarPlanoView {
         for (String material : planoDeEnsino.getBibliografiaComplementar()){
             System.out.println("      - " + material);
         }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nPressione ENTER para voltar");
+        scanner.nextLine();
     }
 }

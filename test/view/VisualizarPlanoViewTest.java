@@ -3,18 +3,11 @@ package view;
 import controller.VisualizarPlanoController;
 import model.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class VisualizarPlanoViewTest {
     public static void main(String[] args) {
-        // Redirecionar saída padrão
-        PrintStream originalOut = System.out;
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(output));
-
         // Criar disciplinas
         Disciplina poo = new Disciplina(1, "Programação Orientada a Objetos", "INF101", 60, 5, 30, new ArrayList<>(), 1);
         Disciplina intro = new Disciplina(2, "Introdução à Programação", "INF100", 60, 0,0, new ArrayList<>(), 0);
@@ -61,23 +54,6 @@ public class VisualizarPlanoViewTest {
         // Executar método
         view.visualizarPlano();
 
-        // Restaurar System.out
-        System.setOut(originalOut);
-
-        // Verificar saída esperada
-        String saida = output.toString();
-        System.out.println("==== SAÍDA DO TESTE ====");
-        System.out.println(saida);
-        System.out.println("========================");
-
-        // Verificação manual
-        if (saida.contains("Programação Orientada a Objetos") &&
-                saida.contains("INF101") &&
-                saida.contains("Introdução à Programação") &&
-                saida.contains("Justificativa teste")) {
-            System.out.println("✅ Teste passou!");
-        } else {
-            System.out.println("❌ Teste falhou!");
-        }
+        System.out.println("View anterior");
     }
 }

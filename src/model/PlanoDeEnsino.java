@@ -8,6 +8,7 @@ public class PlanoDeEnsino {
     private int ano;
     private int semestre;
     private String justificativa;
+    private String justificativaReprovacao;
     private String ementa;
     private String objetivoGeral;
     private String objetivoEspecifico;
@@ -98,6 +99,16 @@ public class PlanoDeEnsino {
 
     public void setJustificativa(String justificativa) {
         this.justificativa = justificativa;
+    }
+
+    public String getJustificativaReprovacao() {
+        return justificativaReprovacao;
+    }
+
+    public void setJustificativaReprovacao(String justificativaReprovacao) {
+        if (status.equals(StatusPlano.REPROVADO)) {
+            this.justificativaReprovacao = justificativaReprovacao;
+        }
     }
 
     public String getEmenta() {

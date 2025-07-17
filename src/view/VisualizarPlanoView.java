@@ -1,16 +1,21 @@
 package view;
 
 import java.util.List;
+import java.util.Scanner;
 
 import controller.VisualizarPlanoController;
+import model.PerfilUsuario;
 import model.PlanoDeEnsino;
+import model.StatusPlano;
 
 public class VisualizarPlanoView {
     private final VisualizarPlanoController controller;
     private int idPlanoDeEnsino;
+    private final PerfilUsuario perfil;
 
     public VisualizarPlanoView(VisualizarPlanoController controller) {
         this.controller = controller;
+        perfil = controller.getPerfilUsuarioLogado();
     }
 
     public VisualizarPlanoController getController() {
@@ -25,12 +30,30 @@ public class VisualizarPlanoView {
         this.idPlanoDeEnsino = idPlanoDeEnsino;
     }
 
+    public PerfilUsuario getPerfil() {
+        return perfil;
+    }
+
     public void visualizarPlano() {
         PlanoDeEnsino planoDeEnsino = controller.buscarPlanoDeEnsinoPorId(idPlanoDeEnsino);
 
-        System.out.print("PLANO DE ENSINO DE DISCIPLINA\n\n");
+        if (perfil.equals(PerfilUsuario.ALUNO) && !planoDeEnsino.getStatus().equals(StatusPlano.APROVADO)) {
+            System.out.println("Você não tem permissão para acessar esta tela");
+            return;
+        }
 
-        System.out.printf("Ano/Semestre: %d.%d\n\n", planoDeEnsino.getAno(), planoDeEnsino.getSemestre());
+        System.out.print("PLANO DE ENSINO DE DISCIPLINA\n");
+
+        if (perfil.equals(PerfilUsuario.PROFESSOR) || perfil.equals(PerfilUsuario.COORDENADOR)) {
+            System.out.println("\nStatus: " + planoDeEnsino.getStatus().getNome());
+
+            if (planoDeEnsino.getStatus().equals(StatusPlano.REPROVADO)) {
+                System.out.println("\nJustificativa da reprovação:");
+                System.out.println("    " +  planoDeEnsino.getJustificativaReprovacao());
+            }
+        }
+
+        System.out.printf("\nAno/Semestre: %d.%d\n\n", planoDeEnsino.getAno(), planoDeEnsino.getSemestre());
 
         System.out.println("1. Identificação");
         System.out.println("    1.1. Unidade: " + controller.getUnidade(planoDeEnsino).getNome());
@@ -39,9 +62,9 @@ public class VisualizarPlanoView {
         System.out.println("    1.4. Código da Disciplina: " + controller.getDisciplina(planoDeEnsino).getCodigoDisciplina());
         System.out.printf("    1.5. Caráter da Disciplina: %s\n", planoDeEnsino.getIsObrigatoria() ? "Obrigatória" : "Optativa");
         System.out.println("    1.6. Carga horária:");
-        System.out.println("        - Total: " + (controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica() + controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica()));
-        System.out.println("        - Teórica: " + controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica());
-        System.out.println("        - Prática: " + controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica());
+        System.out.printf("        - Total: %dh\n", controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica() + controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica());
+        System.out.printf("        - Teórica: %dh\n", controller.getDisciplina(planoDeEnsino).getCargaHorariaTeorica());
+        System.out.printf("        - Prática: %dh\n", controller.getDisciplina(planoDeEnsino).getCargaHorariaPratica());
         System.out.print("    1.7. Pré-requisitos: ");
 
         List<Integer> preRequisitos = controller.getDisciplina(planoDeEnsino).getPreRequisitos();
@@ -93,5 +116,10 @@ public class VisualizarPlanoView {
         for (String material : planoDeEnsino.getBibliografiaComplementar()){
             System.out.println("      - " + material);
         }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nPressione ENTER para voltar");
+        scanner.nextLine();
     }
 }

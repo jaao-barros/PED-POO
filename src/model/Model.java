@@ -16,6 +16,7 @@ public class Model {
     private final Map<Integer, Professor> professores;
     private final Map<Integer, UnidadeAcademica> unidadesAcademicas;
     private final Set<Observer> observers;
+    private Usuario usuarioLogado;
 
     private Model() {
         coordenacoes = new HashMap<>();
@@ -61,6 +62,14 @@ public class Model {
 
     public Set<Observer> getObservers() {
         return observers;
+    }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
     }
 
     public boolean adicionarCoordenacao(Coordenacao coordenacao) {

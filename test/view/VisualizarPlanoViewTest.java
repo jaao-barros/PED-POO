@@ -3,6 +3,7 @@ package view;
 import controller.VisualizarPlanoController;
 import model.*;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -32,12 +33,15 @@ public class VisualizarPlanoViewTest {
         plano.setIdUnidadeAcademica(unidade.getIdUnidadeAcademica());
         plano.setCodigoCurso(curso.getCodigoCurso());
         plano.setJustificativa("justificativa teste");
+        plano.setStatus(StatusPlano.REPROVADO);
+        plano.setJustificativaReprovacao("justificativa de reprovação teste");
 
         plano.setIdDisciplina(1);
         plano.setIdProfessor(1);
 
         // Criar model e adicionar dados
         Model model = Model.getInstancia();
+        model.setUsuarioLogado(new Usuario("Bernardo", "bernardo@ufc.br", "123456", "bernardo123", PerfilUsuario.ALUNO));
         model.adicionarDisciplina(poo);
         model.adicionarDisciplina(intro);
         model.adicionarCurso(curso);

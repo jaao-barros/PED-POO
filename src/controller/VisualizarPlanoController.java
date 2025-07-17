@@ -53,4 +53,7 @@ public class VisualizarPlanoController {
         return pre;
     }
 
+    public PerfilUsuario getPerfilUsuarioLogado() {
+        return model.getUsuarioLogado().getPerfil();
+    }
 }

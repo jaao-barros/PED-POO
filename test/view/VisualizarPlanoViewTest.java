@@ -41,7 +41,7 @@ public class VisualizarPlanoViewTest {
 
         // Criar model e adicionar dados
         Model model = Model.getInstancia();
-        model.setUsuarioLogado(new Usuario("Bernardo", "bernardo@ufc.br", "123456", "bernardo123", PerfilUsuario.ALUNO));
+        model.setUsuarioLogado(new Usuario("Bernardo", "bernardo@ufc.br", "123456", "bernardo123", PerfilUsuario.PROFESSOR));
         model.adicionarDisciplina(poo);
         model.adicionarDisciplina(intro);
         model.adicionarCurso(curso);
@@ -52,11 +52,10 @@ public class VisualizarPlanoViewTest {
 
         // Criar view e injetar plano
         VisualizarPlanoView view = new VisualizarPlanoView(controller);
-        view.setIdPlanoDeEnsino(plano.getIdPlanoDeEnsino());
         model.adicionarPlanoDeEnsino(plano);
 
         // Executar método
-        view.visualizarPlano();
+        view.visualizarPlano(plano.getIdPlanoDeEnsino());
 
         System.out.println("View anterior");
     }

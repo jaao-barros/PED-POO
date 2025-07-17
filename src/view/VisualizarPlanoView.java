@@ -10,7 +10,6 @@ import model.StatusPlano;
 
 public class VisualizarPlanoView {
     private final VisualizarPlanoController controller;
-    private int idPlanoDeEnsino;
     private final PerfilUsuario perfil;
 
     public VisualizarPlanoView(VisualizarPlanoController controller) {
@@ -22,19 +21,11 @@ public class VisualizarPlanoView {
         return controller;
     }
 
-    public int getIdPlanoDeEnsino() {
-        return idPlanoDeEnsino;
-    }
-
-    public void setIdPlanoDeEnsino(int idPlanoDeEnsino) {
-        this.idPlanoDeEnsino = idPlanoDeEnsino;
-    }
-
     public PerfilUsuario getPerfil() {
         return perfil;
     }
 
-    public void visualizarPlano() {
+    public void visualizarPlano(int idPlanoDeEnsino) {
         PlanoDeEnsino planoDeEnsino = controller.buscarPlanoDeEnsinoPorId(idPlanoDeEnsino);
 
         if (perfil.equals(PerfilUsuario.ALUNO) && !planoDeEnsino.getStatus().equals(StatusPlano.APROVADO)) {

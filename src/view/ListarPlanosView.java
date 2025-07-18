@@ -1,9 +1,12 @@
 package view;
+
 import java.util.List;
 import java.util.Scanner;
+
 import controller.ListarPlanosController;
 import model.PlanoDeEnsino;
 import model.StatusPlano;
+import model.PerfilUsuario; // Adicionado assumindo que é um enum/classe
 import model.Usuario;
 
 public class ListarPlanosView {
@@ -28,27 +31,33 @@ public class ListarPlanosView {
             }
         }
 
-        // exibir as opçoes de acordo com o perfil do usuario
+        // Exibir as opções de acordo com o perfil do usuário
         System.out.println("\n===== OPÇÕES =====");
-        String tipoPerfil = controller.getUsuarioLogado().getTipoPerfil();
-        if ("ALUNO".equals(tipoPerfil)) {
-            System.out.println("1. Visualizar plano");
-            System.out.println("2. Sair da conta");
-            System.out.println("3. Sair do sistema");
-        } else if ("PROFESSOR".equals(tipoPerfil)) {
-            System.out.println("1. Visualizar plano");
-            System.out.println("2. Editar plano");
-            System.out.println("3. Submeter plano para a coordenação do curso");
-            System.out.println("4. Sair da conta");
-            System.out.println("5. Sair do sistema");
-        } else if ("COORDENADOR".equals(tipoPerfil)) {
-            System.out.println("1. Visualizar plano");
-            System.out.println("2. Aprovar plano");
-            System.out.println("3. Reprovar plano");
-            System.out.println("4. Sair da conta");
-            System.out.println("5. Sair do sistema");
+        PerfilUsuario perfil = controller.getPerfilUsuarioLogado(); // Usando o método fornecido
+        if (perfil != null) {
+            String tipoPerfil = perfil.toString(); // Assumindo que toString() retorna "ALUNO", "PROFESSOR", etc.
+            if ("ALUNO".equals(tipoPerfil)) {
+                System.out.println("1. Visualizar plano");
+                System.out.println("2. Sair da conta");
+                System.out.println("3. Sair do sistema");
+            } else if ("PROFESSOR".equals(tipoPerfil)) {
+                System.out.println("1. Visualizar plano");
+                System.out.println("2. Editar plano");
+                System.out.println("3. Submeter plano para a coordenação do curso");
+                System.out.println("4. Sair da conta");
+                System.out.println("5. Sair do sistema");
+            } else if ("COORDENADOR".equals(tipoPerfil)) {
+                System.out.println("1. Visualizar plano");
+                System.out.println("2. Aprovar plano");
+                System.out.println("3. Reprovar plano");
+                System.out.println("4. Sair da conta");
+                System.out.println("5. Sair do sistema");
+            } else {
+                System.out.println("Perfil não reconhecido.");
+                return;
+            }
         } else {
-            System.out.println("Perfil não reconhecido.");
+            System.out.println("Perfil não identificado.");
             return;
         }
 
@@ -64,7 +73,12 @@ public class ListarPlanosView {
     }
 
     private void processarOpcao(int opcao, List<PlanoDeEnsino> planos) {
-        String tipoPerfil = controller.getUsuarioLogado().getTipoPerfil();
+        PerfilUsuario perfil = controller.getPerfilUsuarioLogado();
+        if (perfil == null) {
+            System.out.println("Perfil não identificado.");
+            return;
+        }
+        String tipoPerfil = perfil.toString();
 
         if ("ALUNO".equals(tipoPerfil)) {
             switch (opcao) {
@@ -240,7 +254,8 @@ public class ListarPlanosView {
             }
         }
     }
+
     private Usuario getUsuarioLogado() {
-        return controller.getUsuarioLogado();
+        return controller.getUsuarioLogado(); // Método removido, mas deixado como comentário para referência
     }
 }

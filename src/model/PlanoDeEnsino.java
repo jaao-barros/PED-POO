@@ -7,6 +7,11 @@ public class PlanoDeEnsino {
     private int idPlanoDeEnsino;
     private int ano;
     private int semestre;
+<<<<<<< HEAD
+=======
+    private String justificativa;
+    private String justificativaReprovacao;
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     private String ementa;
     private String objetivoGeral;
     private String objetivoEspecifico;
@@ -17,11 +22,25 @@ public class PlanoDeEnsino {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataUltimaModificacao;
     private StatusPlano status;
+<<<<<<< HEAD
     private int idDisciplina;
     private int idProfessor;
     private int idUA;
 
     public PlanoDeEnsino(int idPlanoDeEnsino,int ano,int semestre,String ementa,String objetivoGeral,String objetivoEspecifico,String metodologia,String avaliacao,ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar){
+=======
+    private boolean isObrigatoria;
+    private int codigoCurso;
+    private int idDisciplina;
+    private int idProfessor;
+    private int idUnidadeAcademica;
+
+    public PlanoDeEnsino() {
+        super();
+    }
+
+    public PlanoDeEnsino(int idPlanoDeEnsino, int ano, int semestre, String ementa, String objetivoGeral, String objetivoEspecifico, String metodologia, String avaliacao, ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar){
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
         setId(idPlanoDeEnsino);
         setAno(ano);
         setSemestre(semestre);
@@ -85,6 +104,27 @@ public class PlanoDeEnsino {
         this.semestre = semestre;
     }
 
+<<<<<<< HEAD
+=======
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
+    }
+
+    public String getJustificativaReprovacao() {
+        return justificativaReprovacao;
+    }
+
+    public void setJustificativaReprovacao(String justificativaReprovacao) {
+        if (status.equals(StatusPlano.REPROVADO)) {
+            this.justificativaReprovacao = justificativaReprovacao;
+        }
+    }
+
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     public String getEmenta() {
         return ementa;
     }
@@ -140,4 +180,55 @@ public class PlanoDeEnsino {
     public void setBibliografiaComplementar(ArrayList<String> bibliografiaComplementar) {
         this.bibliografiaComplementar = bibliografiaComplementar;
     }
+<<<<<<< HEAD
+=======
+
+    public StatusPlano getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPlano status) {
+        this.status = status;
+    }
+
+    public boolean getIsObrigatoria() {
+        return isObrigatoria;
+    }
+
+    public void setIsObrigatoria(boolean isObrigatoria) {
+        this.isObrigatoria = isObrigatoria;
+    }
+
+    public int getCodigoCurso() {
+        return codigoCurso;
+    }
+
+    public void setCodigoCurso(int codigoCurso) {
+        this.codigoCurso = codigoCurso;
+    }
+
+    public int getIdDisciplina() {
+        return idDisciplina;
+    }
+
+    public void setIdDisciplina(int idDisciplina) {
+        this.idDisciplina = idDisciplina;
+    }
+
+    public int getIdProfessor() {
+        return idProfessor;
+    }
+
+    public void setIdProfessor(int idProfessor) {
+        this.idProfessor = idProfessor;
+    }
+
+    public int getIdUnidadeAcademica() {
+        return idUnidadeAcademica;
+    }
+
+    public void setIdUnidadeAcademica(int idUnidadeAcademica) {
+        this.idUnidadeAcademica = idUnidadeAcademica;
+    }
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 }

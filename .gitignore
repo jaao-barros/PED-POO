@@ -2,7 +2,11 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+<<<<<<< HEAD
 .idea
+=======
+.idea/
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 *.iml
 
 ### Eclipse ###
@@ -29,3 +33,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Java ###
+*.class
+*.jar

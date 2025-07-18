@@ -1,27 +1,20 @@
 package model;
 
-<<<<<<< HEAD
-class Curso {
-=======
 public class Curso {
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     private String nome;
-    private int codigoCurso;
+    private int idCurso;
     private String modalidade;
     private int cargaHorariaTotal;
     private int idUA;
     private String nomeUA;
 
-<<<<<<< HEAD
-
-=======
     public Curso() {
         super();
     }
 
-    public Curso(String nome, int codigoCurso, String modalidade, int cargaHorariaTotal, int idUA, String nomeUA) {
+    public Curso(String nome, int idCurso, String modalidade, int cargaHorariaTotal, int idUA, String nomeUA) {
         this.nome = nome;
-        this.codigoCurso = codigoCurso;
+        this.idCurso = idCurso;
         this.modalidade = modalidade;
         this.cargaHorariaTotal = cargaHorariaTotal;
         this.idUA = idUA;
@@ -36,12 +29,12 @@ public class Curso {
         this.nome = nome;
     }
 
-    public int getCodigoCurso() {
-        return codigoCurso;
+    public int getIdCurso() {
+        return idCurso;
     }
 
-    public void setCodigoCurso(int codigoCurso) {
-        this.codigoCurso = codigoCurso;
+    public void setIdCurso(int idCurso) {
+        this.idCurso = idCurso;
     }
 
     public String getModalidade() {
@@ -75,5 +68,4 @@ public class Curso {
     public void setNomeUA(String nomeUA) {
         this.nomeUA = nomeUA;
     }
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 }

@@ -1,41 +1,53 @@
 package controller;
-import model.*;
-import view.VisualizarPlanoView;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
+import java.util.List;
+import model.*;
 
 public class CriarPlanoController {
     private final Model model;
-    private  final VisualizarPlanoView view;
-    public CriarPlanoController(Model model, VisualizarPlanoView view) {
-        this.view = view;
-        this.model = Model.getInstancia();
+    private Professor professorLogado;
+
+    public CriarPlanoController(Model model, Professor professorLogado) {
+        this.model = model;
+        this.professorLogado = professorLogado;
     }
 
-   public boolean criarPlanoEnsino(int id, int ano, int semestre, String ementa, String objGeral,
-                                   String objEspecifico, String metodologia, String avaliacao,
-                                   ArrayList<String> biblioBasica, ArrayList<String> biblioComplementar,
-                                   int idDisciplina, int idProfessor){
-        PlanoDeEnsino novoPlano = new PlanoDeEnsino();
-        novoPlano.setId(id);
-        novoPlano.setAno(ano);
-        novoPlano.setSemestre(semestre);
-        novoPlano.setEmenta(ementa);
-        novoPlano.setObjetivoGeral(objGeral);
-        novoPlano.setObjetivoEspecifico(objEspecifico);
-        novoPlano.setAvaliacao(avaliacao);
-        novoPlano.setBibliografiaBasica(biblioBasica);
-        novoPlano.setBibliografiaComplementar(biblioComplementar);
-        novoPlano.setIdDisciplina(idDisciplina);
-        novoPlano.setIdProfessor(idProfessor);
+    public List<Disciplina> getDisciplinasLecionadas() {
+        return model.buscarDisciplinasPorProfessor(professorLogado.getId());
+    }
 
-       novoPlano.setStatus(StatusPlano.PENDENTE);
-       novoPlano.setDataCriacao(LocalDateTime.now());
-       novoPlano.setDataUltimaModificacao(LocalDateTime.now(ZoneId.from(LocalDateTime.now())));
+    public boolean validarProfessorDisciplina(Disciplina disciplina) {
+        List<Disciplina> disciplinasLecionadas = getDisciplinasLecionadas();
+        for (Disciplina d : disciplinasLecionadas) {
+            if (d.getIdDisciplina() == disciplina.getIdDisciplina()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-       return model.adicionarPlanoDeEnsino(novoPlano);
+    public void salvarComoRascunho(PlanoDeEnsino plano) {
+        if (plano == null) throw new IllegalArgumentException("Plano de ensino não pode ser nulo.");
+        if (!validarProfessorDisciplina(model.buscarDisciplinaPorId(plano.getIdDisciplina()))) {
+            throw new IllegalArgumentException("O Professor não leciona essa disciplina!");
+        }
+        model.salvarRascunho(plano);
+    }
 
-   }
+    public void submeterParaAprovacao(PlanoDeEnsino plano) {
+        if (plano == null) throw new IllegalArgumentException("Plano de ensino não pode ser nulo.");
+        if (!validarProfessorDisciplina(model.buscarDisciplinaPorId(plano.getIdDisciplina()))) {
+            throw new IllegalArgumentException("O Professor não leciona essa disciplina!");
+        }
+        if (plano.getEmenta() == null || plano.getEmenta().trim().isEmpty() ||
+                plano.getObjetivos() == null || plano.getObjetivos().trim().isEmpty() ||
+                plano.getConteudoProgramatico() == null || plano.getConteudoProgramatico().trim().isEmpty() ||
+                plano.getMetodologia() == null || plano.getMetodologia().trim().isEmpty() ||
+                plano.getAvaliacao() == null || plano.getAvaliacao().trim().isEmpty() ||
+                plano.getBibliografia() == null || plano.getBibliografia().isEmpty() ||
+                plano.getPeriodoLetivo() == null) {
+            throw new IllegalArgumentException("Todos os campos obrigatórios devem ser preenchidos.");
+        }
+        model.submeterParaAprovacao(plano);
+    }
 }

@@ -8,10 +8,8 @@ import view.VisualizarPlanoView;
 
 public class VisualizarPlanoController {
     private final Model model;
-    private final VisualizarPlanoView view;
     public VisualizarPlanoController(Model model, VisualizarPlanoView view) {
         this.model = model;
-        this.view = view;
     }
 
     public PlanoDeEnsino buscarPlanoDeEnsinoPorId(int idPlanoDeEnsino) {
@@ -54,5 +52,4 @@ public class VisualizarPlanoController {
 
         return pre;
     }
-
 }

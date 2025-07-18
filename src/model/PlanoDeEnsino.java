@@ -7,11 +7,8 @@ public class PlanoDeEnsino {
     private int idPlanoDeEnsino;
     private int ano;
     private int semestre;
-<<<<<<< HEAD
-=======
     private String justificativa;
     private String justificativaReprovacao;
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     private String ementa;
     private String objetivoGeral;
     private String objetivoEspecifico;
@@ -22,13 +19,6 @@ public class PlanoDeEnsino {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataUltimaModificacao;
     private StatusPlano status;
-<<<<<<< HEAD
-    private int idDisciplina;
-    private int idProfessor;
-    private int idUA;
-
-    public PlanoDeEnsino(int idPlanoDeEnsino,int ano,int semestre,String ementa,String objetivoGeral,String objetivoEspecifico,String metodologia,String avaliacao,ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar){
-=======
     private boolean isObrigatoria;
     private int codigoCurso;
     private int idDisciplina;
@@ -40,7 +30,6 @@ public class PlanoDeEnsino {
     }
 
     public PlanoDeEnsino(int idPlanoDeEnsino, int ano, int semestre, String ementa, String objetivoGeral, String objetivoEspecifico, String metodologia, String avaliacao, ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar){
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
         setId(idPlanoDeEnsino);
         setAno(ano);
         setSemestre(semestre);
@@ -104,8 +93,6 @@ public class PlanoDeEnsino {
         this.semestre = semestre;
     }
 
-<<<<<<< HEAD
-=======
     public String getJustificativa() {
         return justificativa;
     }
@@ -124,7 +111,6 @@ public class PlanoDeEnsino {
         }
     }
 
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     public String getEmenta() {
         return ementa;
     }
@@ -180,8 +166,6 @@ public class PlanoDeEnsino {
     public void setBibliografiaComplementar(ArrayList<String> bibliografiaComplementar) {
         this.bibliografiaComplementar = bibliografiaComplementar;
     }
-<<<<<<< HEAD
-=======
 
     public StatusPlano getStatus() {
         return status;
@@ -230,5 +214,4 @@ public class PlanoDeEnsino {
     public void setIdUnidadeAcademica(int idUnidadeAcademica) {
         this.idUnidadeAcademica = idUnidadeAcademica;
     }
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 }

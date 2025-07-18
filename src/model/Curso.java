@@ -1,10 +1,6 @@
 package model;
 
-<<<<<<< HEAD
-class Curso {
-=======
 public class Curso {
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     private String nome;
     private int codigoCurso;
     private String modalidade;
@@ -12,9 +8,6 @@ public class Curso {
     private int idUA;
     private String nomeUA;
 
-<<<<<<< HEAD
-
-=======
     public Curso() {
         super();
     }
@@ -75,5 +68,4 @@ public class Curso {
     public void setNomeUA(String nomeUA) {
         this.nomeUA = nomeUA;
     }
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 }

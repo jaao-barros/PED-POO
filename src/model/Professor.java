@@ -5,8 +5,6 @@ public class Professor {
     private String nome;
     private String email;
     private int idUA;
-<<<<<<< HEAD
-=======
 
     public Professor() {
         super();
@@ -50,5 +48,4 @@ public class Professor {
     public void setIdUA(int idUA) {
         this.idUA = idUA;
     }
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 }

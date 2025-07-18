@@ -1,12 +1,6 @@
 package model;
 
 public enum StatusPlano {
-<<<<<<< HEAD
-    EM_REVISAO,
-    APROVADO,
-    PENDENTE,
-    REPROVADO
-=======
     EM_REVISAO("Em revisão"),
     APROVADO("Aprovado"),
     PENDENTE("Pendente"),
@@ -21,5 +15,4 @@ public enum StatusPlano {
     public String getNome() {
         return nome;
     }
->>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 }

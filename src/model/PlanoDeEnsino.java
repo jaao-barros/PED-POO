@@ -29,10 +29,11 @@ public class PlanoDeEnsino {
         super();
     }
 
-    public PlanoDeEnsino(int idPlanoDeEnsino, int ano, int semestre, String ementa, String objetivoGeral, String objetivoEspecifico, String metodologia, String avaliacao, ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar){
+    public PlanoDeEnsino(int idPlanoDeEnsino,int ano,int semestre,String justificativa,String ementa,String objetivoGeral,String objetivoEspecifico,String metodologia,String avaliacao,ArrayList<String> bibliografiaBasica, ArrayList<String> bibliografiaComplementar,LocalDateTime dataUltimaModificacao,StatusPlano status,int idDisciplina,int idProfessor,int idUnidadeAcademica){
         setId(idPlanoDeEnsino);
         setAno(ano);
         setSemestre(semestre);
+        setJustificativa(justificativa);
         setEmenta(ementa);
         setObjetivoGeral(objetivoGeral);
         setObjetivoEspecifico(objetivoEspecifico);
@@ -40,8 +41,12 @@ public class PlanoDeEnsino {
         setAvaliacao(avaliacao);
         setBibliografiaBasica(bibliografiaBasica);
         setBibliografiaComplementar(bibliografiaComplementar);
-        setDataCriacao(dataCriacao);
+        this.dataCriacao =LocalDateTime.now();
         setDataUltimaModificacao(dataUltimaModificacao);
+        setStatus(Status);
+        setIdDisciplina(idDisciplina);
+        setIdProfessor(idProfessor);
+        setIdUnidadeAcademica(idUnidadeAcademica);
     }
 
     public int getId(){

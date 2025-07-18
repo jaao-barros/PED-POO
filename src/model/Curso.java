@@ -2,7 +2,7 @@ package model;
 
 public class Curso {
     private String nome;
-    private int codigoCurso;
+    private int idCurso;
     private String modalidade;
     private int cargaHorariaTotal;
     private int idUA;
@@ -12,9 +12,9 @@ public class Curso {
         super();
     }
 
-    public Curso(String nome, int codigoCurso, String modalidade, int cargaHorariaTotal, int idUA, String nomeUA) {
+    public Curso(String nome, int idCurso, String modalidade, int cargaHorariaTotal, int idUA, String nomeUA) {
         this.nome = nome;
-        this.codigoCurso = codigoCurso;
+        this.idCurso = idCurso;
         this.modalidade = modalidade;
         this.cargaHorariaTotal = cargaHorariaTotal;
         this.idUA = idUA;
@@ -29,12 +29,12 @@ public class Curso {
         this.nome = nome;
     }
 
-    public int getCodigoCurso() {
-        return codigoCurso;
+    public int getIdCurso() {
+        return idCurso;
     }
 
-    public void setCodigoCurso(int codigoCurso) {
-        this.codigoCurso = codigoCurso;
+    public void setIdCurso(int idCurso) {
+        this.idCurso = idCurso;
     }
 
     public String getModalidade() {

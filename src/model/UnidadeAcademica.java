@@ -1,6 +1,11 @@
 package model;
 
 public class UnidadeAcademica implements Universidade {
+<<<<<<< HEAD
+    private int idUA;
+    private String nome;
+    private String endereco;
+=======
     private int idUnidadeAcademica;
     private String nome;
     private String endereco;
@@ -38,4 +43,5 @@ public class UnidadeAcademica implements Universidade {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 }

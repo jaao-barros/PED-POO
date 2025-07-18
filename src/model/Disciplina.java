@@ -2,7 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+class Disciplina {
+=======
 public class Disciplina {
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     private int idDisciplina;
     private String nome;
     private String codigoDisciplina;
@@ -12,6 +16,8 @@ public class Disciplina {
     private ArrayList<Integer> preRequisitos;
     private int idCurso;
 
+<<<<<<< HEAD
+=======
     public Disciplina() {
         super();
     }
@@ -90,4 +96,5 @@ public class Disciplina {
     public void setIdCurso(int idCurso) {
         this.idCurso = idCurso;
     }
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
 }

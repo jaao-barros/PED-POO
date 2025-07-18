@@ -3,18 +3,26 @@ package model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+class Coordenacao {
+=======
 public class Coordenacao {
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     private int idCoordenacao;
     private int idCurso;
     private int idProfessorCoordenador;
     private LocalDateTime inicioGestao;
     private LocalDateTime fimGestao;
 
+<<<<<<< HEAD
+    public Coordenacao(int idCoordenacao,int idCurso,int idProfessorCoordenador){
+=======
     public Coordenacao() {
         super();
     }
 
     public Coordenacao(int idCoordenacao, int idCurso, int idProfessorCoordenador, LocalDateTime inicioGestao, LocalDateTime fimGestao) {
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
         setIdCoordenacao(idCoordenacao);
         setIdCurso(idCurso);
         setIdProfessorCoordenador(idProfessorCoordenador);
@@ -22,6 +30,10 @@ public class Coordenacao {
         setFimGestao(fimGestao);
     }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> b464222d75cc28af23baa6daeac88e2180176cf5
     public int getIdCoordenacao() {
         return idCoordenacao;
     }

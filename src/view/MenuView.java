@@ -11,7 +11,7 @@ public class MenuView {
     public MenuView() {
         this.scanner = new Scanner(System.in);
     }
-
+//oi
     public void exibirBoasVindas(String nomeUsuario, PerfilUsuario perfil) {
         System.out.println("------------------------------------------");
         System.out.println(" Bem-vindo(a), " + nomeUsuario + "!");

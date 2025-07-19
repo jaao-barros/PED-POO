@@ -24,7 +24,7 @@ public class MenuController {
         model.setUsuarioLogado(this.usuarioLogado);
     }
 
-
+//oi
     public void iniciar() {
 
         if (usuarioLogado == null) {

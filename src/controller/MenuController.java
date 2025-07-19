@@ -4,7 +4,7 @@ import model.*;
 import view.CriarPlanoView;
 import view.ListarPlanosView;
 import view.MenuView;
-import controller.CriarPlanoController;
+
 
 public class MenuController {
 

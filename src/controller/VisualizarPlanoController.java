@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 import model.*;
+import view.VisualizarPlanoView;
 
 public class VisualizarPlanoController {
     private final Model model;
-
-    public VisualizarPlanoController(Model model) {
+    public VisualizarPlanoController(Model model, VisualizarPlanoView view) {
         this.model = model;
     }
 
@@ -51,9 +51,5 @@ public class VisualizarPlanoController {
         }
 
         return pre;
-    }
-
-    public PerfilUsuario getPerfilUsuarioLogado() {
-        return model.getUsuarioLogado().getPerfil();
     }
 }

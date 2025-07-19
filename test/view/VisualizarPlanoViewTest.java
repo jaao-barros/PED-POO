@@ -3,12 +3,25 @@ package view;
 import controller.VisualizarPlanoController;
 import model.*;
 
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class VisualizarPlanoViewTest {
-    public static void main(String[] args) {
+     private ModelTest modelTest;
+    private VisualizarPlanoController controller;
+    public VisualizarPlanoViewTest(ModelTest model, VisualizarPlanoController controller) {
+        this.controller = controller;
+        this.model = model;
+    }
+
+    public void main(String[] args) {
+        // Redirecionar saída padrão
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+
         // Criar disciplinas
         Disciplina poo = new Disciplina(1, "Programação Orientada a Objetos", "INF101", 60, 5, 30, new ArrayList<>(), 1);
         Disciplina intro = new Disciplina(2, "Introdução à Programação", "INF100", 60, 0,0, new ArrayList<>(), 0);
@@ -33,22 +46,18 @@ public class VisualizarPlanoViewTest {
         plano.setIdUnidadeAcademica(unidade.getIdUnidadeAcademica());
         plano.setCodigoCurso(curso.getCodigoCurso());
         plano.setJustificativa("justificativa teste");
-        plano.setStatus(StatusPlano.REPROVADO);
-        plano.setJustificativaReprovacao("justificativa de reprovação teste");
 
         plano.setIdDisciplina(1);
         plano.setIdProfessor(1);
 
         // Criar model e adicionar dados
         Model model = Model.getInstancia();
-        model.setUsuarioLogado(new Usuario("Bernardo", "bernardo@ufc.br", "123456", "bernardo123", PerfilUsuario.ALUNO));
         model.adicionarDisciplina(poo);
         model.adicionarDisciplina(intro);
         model.adicionarCurso(curso);
         model.adicionarUnidadeAcademica(unidade);
         model.adicionarProfessor(professor);
 
-        VisualizarPlanoController controller = new VisualizarPlanoController(model);
 
         // Criar view e injetar plano
         VisualizarPlanoView view = new VisualizarPlanoView(controller);
@@ -58,6 +67,23 @@ public class VisualizarPlanoViewTest {
         // Executar método
         view.visualizarPlano();
 
-        System.out.println("View anterior");
+        // Restaurar System.out
+        System.setOut(originalOut);
+
+        // Verificar saída esperada
+        String saida = output.toString();
+        System.out.println("==== SAÍDA DO TESTE ====");
+        System.out.println(saida);
+        System.out.println("========================");
+
+        // Verificação manual
+        if (saida.contains("Programação Orientada a Objetos") &&
+                saida.contains("INF101") &&
+                saida.contains("Introdução à Programação") &&
+                saida.contains("Justificativa teste")) {
+            System.out.println("✅ Teste passou!");
+        } else {
+            System.out.println("❌ Teste falhou!");
+        }
     }
 }

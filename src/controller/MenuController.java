@@ -1,35 +1,71 @@
 package controller;
 
-
 import model.*;
+import view.CriarPlanoView;
+import view.ListarPlanosView;
 import view.MenuView;
+import controller.CriarPlanoController;
 
 public class MenuController {
 
     private Usuario usuarioLogado;
+    private Professor professorLogado;
     private final MenuView menuView;
+    private final Model model;
 
-    public MenuController() {
+
+    public MenuController(Usuario usuarioLogado) {
         this.menuView = new MenuView();
+        this.model = Model.getInstancia();
 
-        this.usuarioLogado = new Usuario("João Silva", PerfilUsuario.ALUNO);
+
+        this.usuarioLogado = usuarioLogado;
+
+        model.setUsuarioLogado(this.usuarioLogado);
     }
 
-    // metodo para iniciar o menu
+
     public void iniciar() {
-        menuView.exibirBoasVindas(usuarioLogado.getNome(), usuarioLogado.getPerfil());
+
+        if (usuarioLogado == null) {
+            menuView.exibirMensagem("Erro: Nao ha usuario logado. Retornando ao login.");
+            return;
+        }
+
+
+        menuView.exibirBoasVindas(usuarioLogado.getNomeCompleto(), usuarioLogado.getPerfil());
         int opcao;
+
+
         do {
             exibirMenuPorPerfil();
             opcao = menuView.lerOpcao();
             processarOpcao(opcao);
-        } while (opcao != 0 && opcao != 5);
+
+
+            if (usuarioLogado == null) {
+                break;
+            }
+
+
+        } while (opcao != 0);
+
 
         menuView.fecharScanner();
         menuView.exibirMensagem("Saindo do sistema. Obrigado!");
+        System.exit(0);
     }
 
+
+
     private void exibirMenuPorPerfil() {
+
+        if (usuarioLogado == null) {
+            menuView.exibirMensagem("Erro: Nenhum usuario logado para exibir o menu.");
+
+            return;
+        }
+
         switch (usuarioLogado.getPerfil()) {
             case ALUNO:
                 menuView.exibirMenuAluno();
@@ -41,13 +77,18 @@ public class MenuController {
                 menuView.exibirMenuCoordenador();
                 break;
             default:
-                menuView.exibirMensagem("Perfil não reconhecido. Opções limitadas.");
+                menuView.exibirMensagem("Perfil nao reconhecido. Opcoes limitadas.");
                 menuView.exibirMenuAluno();
                 break;
         }
     }
 
     private void processarOpcao(int opcao) {
+        if (usuarioLogado == null) {
+            menuView.exibirMensagem("Erro: Nenhuma sessao ativa para processar a opcao.");
+            return;
+        }
+
         switch (usuarioLogado.getPerfil()) {
             case ALUNO:
                 processarOpcaoAluno(opcao);
@@ -67,12 +108,14 @@ public class MenuController {
     private void processarOpcaoAluno(int opcao) {
         switch (opcao) {
             case 1:
-                visualizarPlanosEnsino();
+                ListarPlanosController listarPlanosController = new ListarPlanosController(this.model, this.usuarioLogado);
+                ListarPlanosView listarPlanosView = new ListarPlanosView(listarPlanosController);
+                listarPlanosView.exibirTelaListagem();
                 break;
             case 2:
                 sairDaConta();
                 break;
-            case 3:
+            case 0:
                 break;
             default:
                 menuView.exibirOpcaoInvalida();
@@ -83,18 +126,19 @@ public class MenuController {
     private void processarOpcaoProfessor(int opcao) {
         switch (opcao) {
             case 1:
-                visualizarPlanosEnsino();
+                ListarPlanosController listarPlanosController = new ListarPlanosController(this.model, this.usuarioLogado);
+                ListarPlanosView listarPlanosView = new ListarPlanosView(listarPlanosController);
+                listarPlanosView.exibirTelaListagem();
                 break;
             case 2:
-                criarEditarSubmeterPlanos();
+                CriarPlanoController criarPlanoController = new CriarPlanoController(this.model, this.professorLogado);
+                CriarPlanoView criarPlanoView = new CriarPlanoView(criarPlanoController);
+                criarPlanoView.exibirTelaCriacao();
                 break;
             case 3:
-                verFeedbackPlanosReprovados();
-                break;
-            case 4:
                 sairDaConta();
                 break;
-            case 5:
+            case 0:
                 break;
             default:
                 menuView.exibirOpcaoInvalida();
@@ -105,7 +149,9 @@ public class MenuController {
     private void processarOpcaoCoordenador(int opcao) {
         switch (opcao) {
             case 1:
-                visualizarPlanosEnsino();
+                ListarPlanosController listarPlanosController = new ListarPlanosController(this.model, this.usuarioLogado);
+                ListarPlanosView listarPlanosView = new ListarPlanosView(listarPlanosController);
+                listarPlanosView.exibirTelaListagem();
                 break;
             case 2:
                 sairDaConta();
@@ -118,36 +164,12 @@ public class MenuController {
         }
     }
 
-    // --- Métodos que simulam as funcionalidades ---
-    private void visualizarPlanosEnsino() {
-        menuView.exibirMensagem("Executando: Visualizar planos de ensino...");
-        // Adicione a lógica real aqui (ex: buscar do banco de dados e imprimir)
-    }
 
-    private void criarEditarSubmeterPlanos() {
-        menuView.exibirMensagem("Executando: Criar; submeter planos...");
-        // Adicione a lógica real aqui
-    }
-
-    private void verFeedbackPlanosReprovados() {
-        menuView.exibirMensagem("Executando: Ver feedback de planos reprovados...");
-        // Adicione a lógica real aqui
-    }
-
-    private void aprovarReprovarPlanos() {
-        menuView.exibirMensagem("Executando: Aprovar/reprovar planos submetidos...");
-        // Adicione a lógica real aqui
-    }
-
-    private void acessarHistoricoPlanosCurso() {
-        menuView.exibirMensagem("Executando: Acessar histórico de todos os planos do curso...");
-        // Adicione a lógica real aqui
-    }
 
     private void sairDaConta() {
         menuView.exibirMensagem("Saindo da conta atual...");
+        this.usuarioLogado = null;
+        model.setUsuarioLogado(null);
 
-
-        this.usuarioLogado = null; // "Desloga" o usuário
     }
 }

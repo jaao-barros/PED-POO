@@ -31,9 +31,8 @@ public class MenuView {
         System.out.println("\n--- Menu do Professor ---");
         System.out.println("1. Listar planos de ensino");
         System.out.println("2. Criar novos planos de ensino");
-        System.out.println("3. Ver feedback de planos reprovados");
-        System.out.println("4. Sair da conta");
-        System.out.println("5. Sair do sistema");
+        System.out.println("3. Sair da conta");
+        System.out.println("4. Sair do sistema");
         System.out.print("Escolha uma opção: ");
     }
 

@@ -1,6 +1,6 @@
 package model;
 
-public class Professor {
+public class Professor extends Usuario {
     private int idProfessor;
     private String nome;
     private String email;

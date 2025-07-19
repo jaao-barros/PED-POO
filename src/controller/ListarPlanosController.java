@@ -65,8 +65,8 @@ public class ListarPlanosController {
         if (justificativa == null || justificativa.isEmpty()) {
             throw new IllegalArgumentException("A Justificativa é obrigatória para a reprovação.");
         }
-        // Assumindo que só planos EM_REVISAO podem ser reprovados
-        if (plano.getStatus() != StatusPlano.EM_REVISAO) {
+        //so oq ta em revisao pode ser aprovado
+         if (plano.getStatus() != StatusPlano.EM_REVISAO) {
             throw new IllegalArgumentException("Apenas planos em revisão podem ser reprovados.");
         }
         model.reprovarPlano(plano, justificativa);

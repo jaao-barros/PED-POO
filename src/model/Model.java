@@ -189,7 +189,7 @@ public class Model {
             throw new IllegalArgumentException("Usuário não pode ser nulo");
         }
         int id = novoUsuario.getId();
-        if (usuarios.containsKey(id) || existeMatricula(novoUsuario.getMatricula())) {
+        if (usuarios.get(id) != null || existeMatricula(novoUsuario.getMatricula())) {
             return false;
         }
         usuarios.put(id, novoUsuario);
@@ -202,9 +202,17 @@ public class Model {
     }
 
     public boolean existeMatricula(String matricula) {
-        if (matricula == null) return false;
-        return usuarios.values().stream().anyMatch(u -> u.getMatricula() != null && u.getMatricula().equals(matricula));
+        if (matricula == null) {
+            return false;
+        }
+        for (Usuario usuario : usuarios.values()) {
+            if (usuario.getMatricula() != null && usuario.getMatricula().equals(matricula)) {
+                return true;
+            }
+        }
+        return false;
     }
+
 
     public int gerarIdUnico() {
         int id = 1;

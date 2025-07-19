@@ -10,27 +10,24 @@ public class CadastrarUsuarioController {
     }
 
     public void cadastrarUsuario(String matricula, String nomeCompleto, String email, String senha) {
-
         if (matricula == null || matricula.isEmpty()) {
-            throw new IllegalArgumentException("Matrícula é obrigatória.");
+            throw new IllegalArgumentException("Matrícula é obrigatória!");
         }
         if (nomeCompleto == null || nomeCompleto.isEmpty()) {
-            throw new IllegalArgumentException("Nome completo é obrigatório.");
+            throw new IllegalArgumentException("Nome completo é obrigatório!");
         }
         if (email == null || email.isEmpty()) {
-            throw new IllegalArgumentException("E-mail é obrigatório.");
+            throw new IllegalArgumentException("E-mail é obrigatório!");
         }
         if (senha == null || senha.isEmpty()) {
-            throw new IllegalArgumentException("Senha é obrigatória.");
+            throw new IllegalArgumentException("Senha é obrigatória!");
         }
 
-        //valida a matricul
         if (!isMatriculaValida(matricula)) {
-            throw new IllegalArgumentException("Matrícula inválida ou já existente.");
+            throw new IllegalArgumentException("Matrícula inválida ou já existente!");
         }
 
         int novoId = model.gerarIdUnico();
-        //cria o perfil
         Usuario novoUsuario = new Usuario();
         novoUsuario.setId(novoId);
         novoUsuario.setMatricula(matricula);
@@ -39,13 +36,13 @@ public class CadastrarUsuarioController {
         novoUsuario.setSenha(senha);
         novoUsuario.setPerfil(PerfilUsuario.ALUNO);
 
-
         if (!model.adicionarUsuario(novoUsuario)) {
             throw new IllegalArgumentException("Falha ao salvar o usuário.");
         }
     }
+
     private boolean isMatriculaValida(String matricula) {
-        if (matricula.length() != 8) {
+        if (matricula.length() != 7) {
             return false;
         }
 

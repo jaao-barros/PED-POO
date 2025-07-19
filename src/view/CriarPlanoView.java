@@ -5,7 +5,6 @@ import java.util.Scanner;
 import controller.CriarPlanoController;
 import model.Disciplina;
 import model.PlanoDeEnsino;
-import model.PeriodoLetivo;
 
 public class CriarPlanoView {
     private final CriarPlanoController controller;
@@ -29,7 +28,7 @@ public class CriarPlanoView {
             System.out.println((i + 1) + ". " + disciplinas.get(i).getNome() + " (Código: " + disciplinas.get(i).getCodigoDisciplina() + ")");
         }
         int escolhaDisciplina = scanner.nextInt() - 1;
-        scanner.nextLine(); // Limpar buffer
+        scanner.nextLine();
         if (escolhaDisciplina < 0 || escolhaDisciplina >= disciplinas.size()) {
             System.out.println("Escolha inválida.");
             return;
@@ -73,8 +72,8 @@ public class CriarPlanoView {
         plano.setConteudoProgramatico(conteudoProgramatico);
         plano.setMetodologia(metodologia);
         plano.setAvaliacao(avaliacao);
-        plano.setBibliografia(bibliografia.toArray(new String[0]));
-        plano.setPeriodoLetivo(periodoLetivo);
+        plano.setBibliografiaGeral(bibliografia.toArray(new String[0]));
+        plano.setSemestre(semestre);
 
         System.out.println("\nO que deseja fazer?");
         System.out.println("1. Salvar como rascunho");

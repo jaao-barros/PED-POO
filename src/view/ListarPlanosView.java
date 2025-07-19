@@ -6,7 +6,7 @@ import java.util.Scanner;
 import controller.ListarPlanosController;
 import model.PlanoDeEnsino;
 import model.StatusPlano;
-import model.PerfilUsuario; // Adicionado assumindo que é um enum/classe
+import model.PerfilUsuario;
 import model.Usuario;
 
 public class ListarPlanosView {
@@ -31,11 +31,10 @@ public class ListarPlanosView {
             }
         }
 
-        // Exibir as opções de acordo com o perfil do usuário
         System.out.println("\n===== OPÇÕES =====");
         PerfilUsuario perfil = controller.getPerfilUsuarioLogado(); // Usando o método fornecido
         if (perfil != null) {
-            String tipoPerfil = perfil.toString(); // Assumindo que toString() retorna "ALUNO", "PROFESSOR", etc.
+            String tipoPerfil = perfil.toString();
             if ("ALUNO".equals(tipoPerfil)) {
                 System.out.println("1. Visualizar plano");
                 System.out.println("2. Sair da conta");
@@ -256,6 +255,6 @@ public class ListarPlanosView {
     }
 
     private Usuario getUsuarioLogado() {
-        return controller.getUsuarioLogado(); // Método removido, mas deixado como comentário para referência
+        return controller.getUsuarioLogado();
     }
 }

@@ -12,7 +12,7 @@ public class ListarPlanosController {
     }
 
     public List<PlanoDeEnsino> getPlanosPorPerfil() {
-        String tipoPerfil = usuarioLogado.getTipoPerfil();
+        String tipoPerfil = usuarioLogado.getPerfil().name();
         if ("PROFESSOR".equals(tipoPerfil)) {
             return model.buscarPlanosPorProfessor(usuarioLogado.getId());
         } else if ("ALUNO".equals(tipoPerfil)) {
@@ -44,7 +44,7 @@ public class ListarPlanosController {
 
     public void submeterPlano(PlanoDeEnsino plano) {
         if (plano == null) throw new IllegalArgumentException("Plano não encontrado.");
-        // Assumindo que só planos PENDENTES podem ser submetidos
+        //caso possa ser submetido entra em pendicia
         if (plano.getStatus() != StatusPlano.PENDENTE) {
             throw new IllegalArgumentException("Apenas planos pendentes podem ser submetidos.");
         }
@@ -53,7 +53,7 @@ public class ListarPlanosController {
 
     public void aprovarPlano(PlanoDeEnsino plano) {
         if (plano == null) throw new IllegalArgumentException("Plano não encontrado.");
-        // Assumindo que só planos EM_REVISAO podem ser aprovados
+        //so pode ser aprovado se tiver em revisao
         if (plano.getStatus() != StatusPlano.EM_REVISAO) {
             throw new IllegalArgumentException("Apenas planos em revisão podem ser aprovados.");
         }
@@ -71,11 +71,6 @@ public class ListarPlanosController {
         }
         model.reprovarPlano(plano, justificativa);
     }
-
-    public void logout() {
-        // Lógica de logout
-    }
-
     public void sair() {
         System.exit(0);
     }

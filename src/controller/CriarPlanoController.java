@@ -1,5 +1,5 @@
 package controller;
-
+import model.Professor;
 import java.util.List;
 import model.*;
 
@@ -13,7 +13,7 @@ public class CriarPlanoController {
     }
 
     public List<Disciplina> getDisciplinasLecionadas() {
-        return model.buscarDisciplinasPorProfessor(professorLogado.getId());
+        return model.buscarDisciplinasPorProfessor(professorLogado.getIdProfessor());
     }
 
     public boolean validarProfessorDisciplina(Disciplina disciplina) {
@@ -27,7 +27,7 @@ public class CriarPlanoController {
     }
 
     public void salvarComoRascunho(PlanoDeEnsino plano) {
-        if (plano == null) throw new IllegalArgumentException("Plano de ensino não pode ser nulo.");
+        if (plano == null) throw new IllegalArgumentException("O plano de ensino não pode ser nulo.");
         if (!validarProfessorDisciplina(model.buscarDisciplinaPorId(plano.getIdDisciplina()))) {
             throw new IllegalArgumentException("O Professor não leciona essa disciplina!");
         }
@@ -40,12 +40,12 @@ public class CriarPlanoController {
             throw new IllegalArgumentException("O Professor não leciona essa disciplina!");
         }
         if (plano.getEmenta() == null || plano.getEmenta().trim().isEmpty() ||
-                plano.getObjetivos() == null || plano.getObjetivos().trim().isEmpty() ||
-                plano.getConteudoProgramatico() == null || plano.getConteudoProgramatico().trim().isEmpty() ||
+                plano.getObjetivoGeral() == null || plano.getObjetivoGeral().trim().isEmpty() ||
                 plano.getMetodologia() == null || plano.getMetodologia().trim().isEmpty() ||
                 plano.getAvaliacao() == null || plano.getAvaliacao().trim().isEmpty() ||
-                plano.getBibliografia() == null || plano.getBibliografia().isEmpty() ||
-                plano.getPeriodoLetivo() == null) {
+                plano.getBibliografiaComplementar() == null || plano.getBibliografiaComplementar().isEmpty() ||
+                plano.getBibliografiaBasica() == null || plano.getBibliografiaBasica().isEmpty() ||
+                plano.getSemestre() == 0) {
             throw new IllegalArgumentException("Todos os campos obrigatórios devem ser preenchidos.");
         }
         model.submeterParaAprovacao(plano);

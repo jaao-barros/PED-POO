@@ -4,5 +4,6 @@ public enum StatusPlano {
     EM_REVISAO,
     APROVADO,
     PENDENTE,
-    REPROVADO
+    REPROVADO,
+    RASCUNHO
 }

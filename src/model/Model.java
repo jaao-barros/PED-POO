@@ -163,6 +163,16 @@ public class Model {
         return disciplinas.get(idDisciplina);
     }
 
+    public Disciplina buscarDisciplinaPorCodigo(String codigoDisciplina) {
+        for (Disciplina disciplina : disciplinas.values()) {
+            if (disciplina.getCodigoDisciplina().equals(codigoDisciplina)) {
+                return disciplina;
+            }
+        }
+
+        return null;
+    }
+
     public boolean adicionarPlanoDeEnsino(PlanoDeEnsino plano) {
         if (plano == null) {
             throw new IllegalArgumentException("Plano de Ensino não pode ser nulo");

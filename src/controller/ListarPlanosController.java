@@ -5,10 +5,23 @@ import model.*;
 public class ListarPlanosController {
     private final Model model;
     private final Usuario usuarioLogado;
+    private PerfilUsuario perfilUsuarioLogado;
+    private boolean logoutSolicitado = false;
 
     public ListarPlanosController(Model model, Usuario usuarioLogado) {
         this.model = model;
         this.usuarioLogado = usuarioLogado;
+    }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+    public PerfilUsuario getPerfilUsuarioLogado() {
+        return usuarioLogado.getPerfil();
+    }
+
+    public void logout() {
+        this.logoutSolicitado = true;
     }
 
     public List<PlanoDeEnsino> getPlanosPorPerfil() {
@@ -65,7 +78,7 @@ public class ListarPlanosController {
         if (justificativa == null || justificativa.isEmpty()) {
             throw new IllegalArgumentException("A Justificativa é obrigatória para a reprovação.");
         }
-        // Assumindo que só planos EM_REVISAO podem ser reprovados
+        // que só planos EM_REVISAO podem ser reprovados
         if (plano.getStatus() != StatusPlano.EM_REVISAO) {
             throw new IllegalArgumentException("Apenas planos em revisão podem ser reprovados.");
         }
@@ -74,4 +87,5 @@ public class ListarPlanosController {
     public void sair() {
         System.exit(0);
     }
+
 }

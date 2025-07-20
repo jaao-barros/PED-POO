@@ -20,6 +20,7 @@ public class PlanoDeEnsino {
     private StatusPlano status;
     private boolean isObrigatoria;
     private int codigoCurso;
+    private Disciplina disciplina;
     private int idDisciplina;
     private int idProfessor;
     private int idUnidadeAcademica;
@@ -45,6 +46,14 @@ public class PlanoDeEnsino {
 
     public int getId(){
         return idPlanoDeEnsino;
+    }
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public void setId(int idPlanoDeEnsino){

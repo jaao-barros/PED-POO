@@ -6,7 +6,7 @@ import java.util.Scanner;
 import controller.ListarPlanosController;
 import model.PlanoDeEnsino;
 import model.StatusPlano;
-import model.PerfilUsuario; // Adicionado assumindo que é um enum/classe
+import model.PerfilUsuario;
 import model.Usuario;
 
 public class ListarPlanosView {
@@ -27,15 +27,15 @@ public class ListarPlanosView {
             for (int i = 0; i < planos.size(); i++) {
                 StatusPlano status = planos.get(i).getStatus();
                 String statusTexto = (status != null) ? status.toString() : "DESCONHECIDO";
-                System.out.println((i + 1) + ". " + planos.get(i).getNomeDisciplina() + " (Status: " + statusTexto + ")");
+                System.out.println((i + 1) + ". " + planos.get(i).getIdDisciplina() + " (Status: " + statusTexto + ")");
             }
         }
 
-        // Exibir as opções de acordo com o perfil do usuário
+     //exibe de acordo com as info do usuario
         System.out.println("\n===== OPÇÕES =====");
-        PerfilUsuario perfil = controller.getPerfilUsuarioLogado(); // Usando o método fornecido
+        PerfilUsuario perfil = controller.getPerfilUsuarioLogado();
         if (perfil != null) {
-            String tipoPerfil = perfil.toString(); // Assumindo que toString() retorna "ALUNO", "PROFESSOR", etc.
+            String tipoPerfil = perfil.toString();
             if ("ALUNO".equals(tipoPerfil)) {
                 System.out.println("1. Visualizar plano");
                 System.out.println("2. Sair da conta");
@@ -92,7 +92,7 @@ public class ListarPlanosView {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.APROVADO) {
                                 controller.visualizarPlano(plano);
-                                System.out.println("Visualizando plano: " + plano.getNomeDisciplina());
+                                System.out.println("Visualizando plano: " + plano.getDisciplina().getNome());
                             } else {
                                 System.out.println("Apenas planos aprovados podem ser visualizados.");
                             }
@@ -123,7 +123,7 @@ public class ListarPlanosView {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.APROVADO) {
                                 controller.visualizarPlano(plano);
-                                System.out.println("Visualizando plano: " + plano.getNomeDisciplina());
+                                System.out.println("Visualizando plano: " + plano.getDisciplina().getNome());
                             } else {
                                 System.out.println("Apenas planos aprovados podem ser visualizados.");
                             }
@@ -142,7 +142,7 @@ public class ListarPlanosView {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.APROVADO) {
                                 controller.editarPlano(plano);
-                                System.out.println("Plano editado: " + plano.getNomeDisciplina());
+                                System.out.println("Plano editado: " + plano.getDisciplina().getNome());
                             } else {
                                 System.out.println("Apenas planos aprovados podem ser editados.");
                             }
@@ -161,7 +161,7 @@ public class ListarPlanosView {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.PENDENTE) {
                                 controller.submeterPlano(plano);
-                                System.out.println("Plano submetido: " + plano.getNomeDisciplina());
+                                System.out.println("Plano submetido: " + plano.getDisciplina().getNome());
                             } else {
                                 System.out.println("Apenas planos pendentes podem ser submetidos.");
                             }
@@ -192,7 +192,7 @@ public class ListarPlanosView {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.APROVADO) {
                                 controller.visualizarPlano(plano);
-                                System.out.println("Visualizando plano: " + plano.getNomeDisciplina());
+                                System.out.println("Visualizando plano: " + plano.getDisciplina().getNome());
                             } else {
                                 System.out.println("Apenas planos aprovados podem ser visualizados.");
                             }
@@ -211,7 +211,7 @@ public class ListarPlanosView {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.EM_REVISAO) {
                                 controller.aprovarPlano(plano);
-                                System.out.println("Plano aprovado: " + plano.getNomeDisciplina());
+                                System.out.println("Plano aprovado: " + plano.getDisciplina().getNome());
                             } else {
                                 System.out.println("Apenas planos em revisão podem ser aprovados.");
                             }
@@ -233,7 +233,7 @@ public class ListarPlanosView {
                                 System.out.print("Justificativa para reprovação: ");
                                 String justificativa = scanner.nextLine();
                                 controller.reprovarPlano(plano, justificativa);
-                                System.out.println("Plano reprovado: " + plano.getNomeDisciplina() + " (Justificativa: " + justificativa + ")");
+                                System.out.println("Plano reprovado: " + plano.getDisciplina().getNome() + " (Justificativa: " + justificativa + ")");
                             } else {
                                 System.out.println("Apenas planos em revisão podem ser reprovados.");
                             }
@@ -253,9 +253,5 @@ public class ListarPlanosView {
                     System.out.println("Opção inválida.");
             }
         }
-    }
-
-    private Usuario getUsuarioLogado() {
-        return controller.getUsuarioLogado(); // Método removido, mas deixado como comentário para referência
     }
 }

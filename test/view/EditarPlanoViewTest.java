@@ -4,6 +4,7 @@ import controller.EditarPlanoController;
 import controller.VisualizarPlanoController;
 import model.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -19,27 +20,6 @@ public class EditarPlanoViewTest {
         UnidadeAcademica unidade = new UnidadeAcademica(1, "UFC - Russas", "cidade universitaria");
         Professor professor = new Professor(1, "Prof. João", "asdasd", 1);
 
-        // Criar plano de ensino
-        PlanoDeEnsino plano = new PlanoDeEnsino(
-                1, 2025, 1,
-                "Ementa teste",
-                "Objetivo geral teste",
-                "Objetivos específicos teste",
-                "Metodologia teste",
-                "Avaliação teste",
-                new ArrayList<>(Arrays.asList("livro 1", "livro 2", "livro 3")),
-                new ArrayList<>(Arrays.asList("livro 4", "livro 5", "livro 6"))
-        );
-
-        plano.setIdUnidadeAcademica(unidade.getIdUnidadeAcademica());
-        plano.setCodigoCurso(curso.getCodigoCurso());
-        plano.setJustificativa("justificativa teste");
-        plano.setStatus(StatusPlano.REPROVADO);
-        plano.setJustificativaReprovacao("justificativa de reprovação teste");
-
-        plano.setIdDisciplina(1);
-        plano.setIdProfessor(1);
-
         // Criar model e adicionar dados
         Model model = Model.getInstancia();
         model.setUsuarioLogado(new Usuario("Bernardo", "bernardo@ufc.br", "123456", "bernardo123", PerfilUsuario.PROFESSOR));
@@ -48,6 +28,31 @@ public class EditarPlanoViewTest {
         model.adicionarCurso(curso);
         model.adicionarUnidadeAcademica(unidade);
         model.adicionarProfessor(professor);
+
+        // Criar plano de ensino
+        PlanoDeEnsino plano = new PlanoDeEnsino(
+                1, 2025, 1,
+                "Ementa teste",
+                "Objetivo geral teste",
+                "Objetivos específicos teste",
+                "Metodologia teste",
+                "Avaliação teste",
+                "blablabla",
+                new ArrayList<>(Arrays.asList("livro 1", "livro 2", "livro 3")),
+                new ArrayList<>(Arrays.asList("livro 4", "livro 5", "livro 6")),
+                LocalDateTime.now(),
+                StatusPlano.PENDENTE,
+                1,1,1
+        );
+
+        plano.setIdUnidadeAcademica(unidade.getIdUnidadeAcademica());
+        plano.setIdCurso(curso.getIdCurso());
+        plano.setJustificativa("justificativa teste");
+        plano.setStatus(StatusPlano.REPROVADO);
+        plano.setJustificativaReprovacao("justificativa de reprovação teste");
+
+        plano.setIdDisciplina(1);
+        plano.setIdProfessor(1);
 
         EditarPlanoController controller = new EditarPlanoController(model);
 

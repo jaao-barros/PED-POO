@@ -1,11 +1,13 @@
+package view;
+
 import controller.CadastrarUsuarioController;
+import controller.TelaLoginController;
 import model.*;
-import view.CadastrarUsuarioView;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Main {
+public class CadastrarUsuarioViewTest {
     public static void main(String[] args) {
         // Criar disciplinas
         Disciplina poo = new Disciplina(1, "Programação Orientada a Objetos", "INF101", 60, 5, 30, new ArrayList<>(), 1);
@@ -15,16 +17,19 @@ public class Main {
         Curso curso = new Curso("Engenharia de Software", 1, "", 1, 1, "");
         UnidadeAcademica unidade = new UnidadeAcademica(1, "UFC - Russas", "cidade universitaria");
         Professor professor = new Professor(1, "Prof. João", "asdasd", 1);
-        professor.setDisciplinasLecionadas(new ArrayList<>(List.of(1, 2)));
+        professor.setDisciplinasLecionadas(new ArrayList<>(List.of(1)));
 
         // Criar model e adicionar dados
         Model model = Model.getInstancia();
+        Usuario user1 = new Usuario("Bernardo", "bernardo@ufc.br", "123456", "123456", PerfilUsuario.COORDENADOR);
+        model.setUsuarioLogado(user1);
         model.adicionarDisciplina(poo);
         model.adicionarDisciplina(intro);
         model.adicionarCurso(curso);
         model.adicionarUnidadeAcademica(unidade);
         model.adicionarProfessor(professor);
         Map<Integer, Usuario> usuarios = new HashMap<>();
+        usuarios.put(user1.getId(), user1);
         model.setUsuarios(usuarios);
 
         // Criar plano de ensino
@@ -59,5 +64,4 @@ public class Main {
 
         System.out.println("View anterior");
     }
-
 }

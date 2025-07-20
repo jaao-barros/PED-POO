@@ -5,7 +5,6 @@ import java.util.Scanner;
 import controller.CriarPlanoController;
 import model.Disciplina;
 import model.PlanoDeEnsino;
-import model.PeriodoLetivo;
 
 public class CriarPlanoView {
     private final CriarPlanoController controller;
@@ -18,7 +17,7 @@ public class CriarPlanoView {
     public void exibirTelaCriacao() {
         System.out.println("=== CRIAÇÃO DE PLANO DE ENSINO ===");
 
-        List<Disciplina> disciplinas = controller.getDisciplinasLecionadas();
+        List<Integer> disciplinas = controller.getDisciplinasLecionadas();
         if (disciplinas.isEmpty()) {
             System.out.println("Nenhuma disciplina disponível para este professor.");
             return;
@@ -26,21 +25,28 @@ public class CriarPlanoView {
 
         System.out.println("Selecione a disciplina:");
         for (int i = 0; i < disciplinas.size(); i++) {
-            System.out.println((i + 1) + ". " + disciplinas.get(i).getNome() + " (Código: " + disciplinas.get(i).getCodigoDisciplina() + ")");
+            Disciplina disciplina = controller.buscarDisciplinaPorId(disciplinas.get(i));
+            System.out.println((i + 1) + ". " + disciplina.getNome() + " (Código: " + disciplina.getCodigoDisciplina() + ")");
         }
         int escolhaDisciplina = scanner.nextInt() - 1;
-        scanner.nextLine(); // Limpar buffer
+        scanner.nextLine();
         if (escolhaDisciplina < 0 || escolhaDisciplina >= disciplinas.size()) {
             System.out.println("Escolha inválida.");
             return;
         }
-        Disciplina disciplinaSelecionada = disciplinas.get(escolhaDisciplina);
+        Disciplina disciplinaSelecionada = controller.buscarDisciplinaPorId(disciplinas.get(escolhaDisciplina));
 
-        System.out.println("Ementa:");
+        System.out.println("Justificativa:");
+        String justificativa = scanner.nextLine();
+
+        System.out.println("Justificativa:");
         String ementa = scanner.nextLine();
 
-        System.out.println("Objetivos:");
-        String objetivos = scanner.nextLine();
+        System.out.println("Objetivos gerais:");
+        String objetivosGerais = scanner.nextLine();
+
+        System.out.println("Objetivos específicos:");
+        String objetivosEspecificos = scanner.nextLine();
 
         System.out.println("Conteúdo Programático:");
         String conteudoProgramatico = scanner.nextLine();
@@ -51,48 +57,51 @@ public class CriarPlanoView {
         System.out.println("Avaliação:");
         String avaliacao = scanner.nextLine();
 
-        System.out.println("Digite os itens da Bibliografia (digite 'fim' para encerrar):");
-        List<String> bibliografia = new ArrayList<>();
+        System.out.println("É obrigatória? (sim ou não)");
+        String isObrigatoriaStr = scanner.nextLine();
+        boolean isObrigatoria;
+
+        isObrigatoria = isObrigatoriaStr.equalsIgnoreCase("sim");
+
+        System.out.println("Digite os itens da bibliografia básica (digite 'fim' para encerrar)\n");
+        List<String> bibliografiaBasica = new ArrayList<>();
+
         while (true) {
+            System.out.print("Item: ");
             String item = scanner.nextLine();
             if (item.equalsIgnoreCase("fim")) {
                 break;
             }
             if (!item.isEmpty()) {
-                bibliografia.add(item);
+                bibliografiaBasica.add(item);
             }
         }
-        System.out.println("Período Letivo (formato: AAAA.S):");
-        String periodoLetivoStr = scanner.nextLine();
-        PeriodoLetivo periodoLetivo = new PeriodoLetivo(periodoLetivoStr);
+
+        System.out.println("Digite os itens da bibliografia complementar (digite 'fim' para encerrar)\n");
+        List<String> bibliografiaComplementar = new ArrayList<>();
+
+        while (true) {
+            System.out.print("Item: ");
+            String item = scanner.nextLine();
+            if (item.equalsIgnoreCase("fim")) {
+                break;
+            }
+            if (!item.isEmpty()) {
+                bibliografiaComplementar.add(item);
+            }
+        }
+
+        System.out.println("Ano:");
+        int ano = scanner.nextInt();
+
+        System.out.println("Semestre:");
+        int semestre = scanner.nextInt();
 
         PlanoDeEnsino plano = new PlanoDeEnsino();
-        plano.setIdDisciplina(disciplinaSelecionada.getIdDisciplina());
-        plano.setEmenta(ementa);
-        plano.setObjetivos(objetivos);
-        plano.setConteudoProgramatico(conteudoProgramatico);
-        plano.setMetodologia(metodologia);
-        plano.setAvaliacao(avaliacao);
-        plano.setBibliografia(bibliografia.toArray(new String[0]));
-        plano.setPeriodoLetivo(periodoLetivo);
+        int idDisciplina = disciplinaSelecionada.getIdDisciplina();
 
-        System.out.println("\nO que deseja fazer?");
-        System.out.println("1. Salvar como rascunho");
-        System.out.println("2. Submeter para aprovação");
-        int opcao = scanner.nextInt();
+        controller.gerarPlano(ano, semestre, justificativa, ementa, objetivosGerais, objetivosEspecificos, metodologia, avaliacao, bibliografiaBasica, bibliografiaComplementar, idDisciplina);
 
-        try {
-            if (opcao == 1) {
-                controller.salvarComoRascunho(plano);
-                System.out.println("Plano salvo como rascunho com sucesso!");
-            } else if (opcao == 2) {
-                controller.submeterParaAprovacao(plano);
-                System.out.println("Plano submetido para aprovação com sucesso!");
-            } else {
-                System.out.println("Opção inválida.");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
+        System.out.println("\nPlano criado com sucesso!");
     }
 }

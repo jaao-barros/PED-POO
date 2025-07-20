@@ -1,6 +1,7 @@
 package model;
 
 public class Usuario {
+    private final int id;
     private String nome;
     private String email;
     private String matricula;
@@ -8,11 +9,16 @@ public class Usuario {
     private PerfilUsuario perfil;
 
     public Usuario(String nome, String email, String matricula, String senha, PerfilUsuario perfil) {
+        this.id = Model.getInstancia().getUsuarios().size() + 1;
         this.nome = nome;
         this.email = email;
         this.matricula = matricula;
         this.senha = senha;
         this.perfil = perfil;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNome() {

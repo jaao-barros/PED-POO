@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import model.*;
 
@@ -7,47 +9,36 @@ public class CriarPlanoController {
     private final Model model;
     private Professor professorLogado;
 
-    public CriarPlanoController(Model model, Professor professorLogado) {
+    public CriarPlanoController(Model model) {
         this.model = model;
-        this.professorLogado = professorLogado;
+        this.professorLogado = model.buscarProfessorPorId(model.getUsuarioLogado().getId());
     }
 
-    public List<Disciplina> getDisciplinasLecionadas() {
-        return model.buscarDisciplinasPorProfessor(professorLogado.getId());
+    public void gerarPlano(int ano, int semestre, String justificativa, String ementa, String objetivosGerais, String objetivosEspecificos, String metodologia, String avaliacao, List<String> bibliografiaBasica, List<String> bibliografiaComplementar, int idDisciplina) {
+        int idPlanoDeEnsino = model.getPlanosDeEnsino().size() + 1;
+        int idProfessor = professorLogado.getIdProfessor();
+        int idUnidadeAcademica = model.buscarCursoPorId(model.buscarDisciplinaPorId(idDisciplina).getIdCurso()).getIdUA();
+
+        PlanoDeEnsino novoPlano = new PlanoDeEnsino(idPlanoDeEnsino, ano, semestre, justificativa, ementa, objetivosGerais, objetivosEspecificos, metodologia, avaliacao, new ArrayList<>(bibliografiaBasica), new ArrayList<>(bibliografiaComplementar), LocalDateTime.now(), StatusPlano.PENDENTE, idDisciplina, idProfessor, idUnidadeAcademica);
+
+        model.adicionarPlanoDeEnsino(novoPlano);
+    }
+
+    public List<Integer> getDisciplinasLecionadas() {
+        return professorLogado.getDisciplinasLecionadas();
+    }
+
+    public Disciplina buscarDisciplinaPorId(int idDisciplina) {
+        return model.buscarDisciplinaPorId(idDisciplina);
     }
 
     public boolean validarProfessorDisciplina(Disciplina disciplina) {
-        List<Disciplina> disciplinasLecionadas = getDisciplinasLecionadas();
-        for (Disciplina d : disciplinasLecionadas) {
-            if (d.getIdDisciplina() == disciplina.getIdDisciplina()) {
+        List<Integer> disciplinasLecionadas = professorLogado.getDisciplinasLecionadas();
+        for (int idDisciplina : disciplinasLecionadas) {
+            if (idDisciplina == disciplina.getIdDisciplina()) {
                 return true;
             }
         }
         return false;
-    }
-
-    public void salvarComoRascunho(PlanoDeEnsino plano) {
-        if (plano == null) throw new IllegalArgumentException("Plano de ensino não pode ser nulo.");
-        if (!validarProfessorDisciplina(model.buscarDisciplinaPorId(plano.getIdDisciplina()))) {
-            throw new IllegalArgumentException("O Professor não leciona essa disciplina!");
-        }
-        model.salvarRascunho(plano);
-    }
-
-    public void submeterParaAprovacao(PlanoDeEnsino plano) {
-        if (plano == null) throw new IllegalArgumentException("Plano de ensino não pode ser nulo.");
-        if (!validarProfessorDisciplina(model.buscarDisciplinaPorId(plano.getIdDisciplina()))) {
-            throw new IllegalArgumentException("O Professor não leciona essa disciplina!");
-        }
-        if (plano.getEmenta() == null || plano.getEmenta().trim().isEmpty() ||
-                plano.getObjetivos() == null || plano.getObjetivos().trim().isEmpty() ||
-                plano.getConteudoProgramatico() == null || plano.getConteudoProgramatico().trim().isEmpty() ||
-                plano.getMetodologia() == null || plano.getMetodologia().trim().isEmpty() ||
-                plano.getAvaliacao() == null || plano.getAvaliacao().trim().isEmpty() ||
-                plano.getBibliografia() == null || plano.getBibliografia().isEmpty() ||
-                plano.getPeriodoLetivo() == null) {
-            throw new IllegalArgumentException("Todos os campos obrigatórios devem ser preenchidos.");
-        }
-        model.submeterParaAprovacao(plano);
     }
 }

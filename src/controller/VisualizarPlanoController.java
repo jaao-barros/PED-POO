@@ -32,7 +32,7 @@ public class VisualizarPlanoController {
 
     public Curso getCurso(PlanoDeEnsino plano) {
         if (plano == null) throw new IllegalArgumentException("Plano de ensino não pode ser nulo.");
-        return model.buscarCursoPorId(plano.getCodigoCurso());
+        return model.buscarCursoPorId(plano.getIdCurso());
     }
 
     public UnidadeAcademica getUnidade(PlanoDeEnsino plano) {

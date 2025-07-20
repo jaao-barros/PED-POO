@@ -17,6 +17,15 @@ public class Model {
     private final Map<Integer, UnidadeAcademica> unidadesAcademicas;
     private final Set<Observer> observers;
     private Usuario usuarioLogado;
+    private Map<Integer, Usuario> usuarios;
+
+    public Map<Integer, Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Map<Integer, Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
 
     private Model() {
         coordenacoes = new HashMap<>();
@@ -26,6 +35,7 @@ public class Model {
         professores = new HashMap<>();
         unidadesAcademicas = new HashMap<>();
         observers = new HashSet<>();
+        usuarios = new HashMap<>();
     }
 
     public static Model getInstancia() {
@@ -107,7 +117,7 @@ public class Model {
             throw new IllegalArgumentException("Curso não pode ser nulo");
         }
 
-        int idCurso = curso.getCodigoCurso();
+        int idCurso = curso.getIdCurso();
 
         if (cursos.containsKey(idCurso)) {
             return false;

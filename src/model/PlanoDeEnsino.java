@@ -20,7 +20,7 @@ public class PlanoDeEnsino {
     private LocalDateTime dataUltimaModificacao;
     private StatusPlano status;
     private boolean isObrigatoria;
-    private int codigoCurso;
+    private int idCurso;
     private int idDisciplina;
     private int idProfessor;
     private int idUnidadeAcademica;
@@ -43,10 +43,11 @@ public class PlanoDeEnsino {
         setBibliografiaComplementar(bibliografiaComplementar);
         this.dataCriacao =LocalDateTime.now();
         setDataUltimaModificacao(dataUltimaModificacao);
-        setStatus(Status);
+        setStatus(status);
         setIdDisciplina(idDisciplina);
         setIdProfessor(idProfessor);
         setIdUnidadeAcademica(idUnidadeAcademica);
+        setIdCurso(Model.getInstancia().buscarDisciplinaPorId(idDisciplina).getIdCurso());
     }
 
     public int getId(){
@@ -61,8 +62,8 @@ public class PlanoDeEnsino {
         return dataCriacao;
     }
     public void setDataCriacao(LocalDateTime dataCriacao){
-        dataCriacao = LocalDateTime.now();//verificar se é a primeira vez/ja existe
-        this.dataCriacao = dataCriacao;//verificar se é a primeira vez/ja existe
+        dataCriacao = LocalDateTime.now();
+        this.dataCriacao = dataCriacao;
     }
 
     public LocalDateTime getDataUltimaModificacao(){
@@ -188,12 +189,12 @@ public class PlanoDeEnsino {
         this.isObrigatoria = isObrigatoria;
     }
 
-    public int getCodigoCurso() {
-        return codigoCurso;
+    public int getIdCurso() {
+        return idCurso;
     }
 
-    public void setCodigoCurso(int codigoCurso) {
-        this.codigoCurso = codigoCurso;
+    public void setIdCurso(int idCurso) {
+        this.idCurso = idCurso;
     }
 
     public int getIdDisciplina() {

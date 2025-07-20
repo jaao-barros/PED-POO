@@ -1,10 +1,13 @@
 package model;
 
+import java.util.List;
+
 public class Professor {
     private int idProfessor;
     private String nome;
     private String email;
     private int idUA;
+    private List<Integer> disciplinasLecionadas;
 
     public Professor() {
         super();
@@ -47,5 +50,13 @@ public class Professor {
 
     public void setIdUA(int idUA) {
         this.idUA = idUA;
+    }
+
+    public List<Integer> getDisciplinasLecionadas() {
+        return disciplinasLecionadas;
+    }
+
+    public void setDisciplinasLecionadas(List<Integer> disciplinasLecionadas) {
+        this.disciplinasLecionadas = disciplinasLecionadas;
     }
 }

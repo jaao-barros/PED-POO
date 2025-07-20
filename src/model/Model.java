@@ -1,9 +1,7 @@
 package model;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import view.Observer;
 
@@ -293,5 +291,259 @@ public class Model {
         }
 
         return observers.remove(observer);
+    }
+
+    public boolean adicionarUsuario(Usuario novoUsuario) {
+
+        if (novoUsuario == null) {
+
+            throw new IllegalArgumentException("Usuário não pode ser nulo");
+
+        }
+
+        int id = novoUsuario.getId();
+
+        if (usuarios.containsKey(id) || existeMatricula(novoUsuario.getMatricula())) {
+
+            return false;
+
+        }
+
+        usuarios.put(id, novoUsuario);
+
+        notificarObservers();
+
+        return true;
+
+    }
+
+
+
+    public Usuario buscarUsuarioPorId(int id) {
+
+        return usuarios.get(id);
+
+    }
+
+
+
+    public boolean existeMatricula(String matricula) {
+
+        if (matricula == null) return false;
+
+        return usuarios.values().stream().anyMatch(u -> u.getMatricula() != null && u.getMatricula().equals(matricula));
+
+    }
+
+
+
+    public int gerarIdUnico() {
+
+        int id = 1;
+
+        while (usuarios.containsKey(id)) {
+
+            id++;
+
+        }
+
+        return id;
+
+    }
+
+
+
+
+
+    public List<Disciplina> buscarDisciplinasPorProfessor(int idProfessor) {
+
+        List<Disciplina> disciplinasDoProfessor = new ArrayList<>();
+
+
+
+        for (PlanoDeEnsino plano : this.planosDeEnsino.values()) {
+
+
+
+            if (plano.getIdProfessor() == idProfessor) {
+
+                Disciplina disciplina = this.disciplinas.get(plano.getIdDisciplina());
+
+
+
+                if (disciplina != null && !disciplinasDoProfessor.contains(disciplina)) {
+
+                    disciplinasDoProfessor.add(disciplina);
+
+                }
+
+            }
+
+        }
+
+        return disciplinasDoProfessor;
+
+    }
+
+
+
+
+
+    public void aprovarPlano(PlanoDeEnsino plano) {
+
+        if (plano != null) {
+
+            plano.setStatus(StatusPlano.APROVADO);
+
+            plano.setDataUltimaModificacao(LocalDateTime.now());
+
+            planosDeEnsino.put(plano.getIdPlanoDeEnsino(), plano);
+
+            notificarObservers();
+
+        }
+
+    }
+
+    public void reprovarPlano(PlanoDeEnsino plano, String justificativa) {
+
+        if (plano != null) {
+
+            plano.setStatus(StatusPlano.REPROVADO);
+
+            plano.setJustificativa(justificativa);
+
+            plano.setDataUltimaModificacao(LocalDateTime.now());
+
+            planosDeEnsino.put(plano.getIdPlanoDeEnsino(), plano);
+
+            notificarObservers();
+
+        }
+
+    }
+
+    public void atualizarPlano(PlanoDeEnsino plano) {
+
+        if (plano != null) {
+
+            plano.setDataUltimaModificacao(LocalDateTime.now());
+
+            planosDeEnsino.put(plano.getIdPlanoDeEnsino(), plano);
+
+            notificarObservers();
+
+        }
+
+    }
+
+
+
+    public void salvarRascunho(PlanoDeEnsino plano) {
+
+        if (plano == null) throw new IllegalArgumentException("Plano não pode ser nulo.");
+
+
+
+        plano.setStatus(StatusPlano.PENDENTE);
+
+        plano.setDataUltimaModificacao(LocalDateTime.now());
+
+        planosDeEnsino.put(plano.getIdPlanoDeEnsino(), plano);
+
+
+
+        System.out.println("Plano salvo como rascunho.");
+
+        notificarObservers();
+
+    }
+
+
+
+    public void submeterParaAprovacao(PlanoDeEnsino plano) {
+
+        if (plano == null) throw new IllegalArgumentException("O Plano não pode ser nulo.");
+
+
+
+        plano.setStatus(StatusPlano.EM_REVISAO);
+
+        plano.setDataUltimaModificacao(LocalDateTime.now());
+
+
+
+        planosDeEnsino.put(plano.getIdPlanoDeEnsino(), plano);
+
+
+
+        System.out.println("O Plano foi submetido para aprovação.");
+
+        notificarObservers();
+
+    }
+
+
+
+    public List<PlanoDeEnsino> buscarTodosPlanosSubmetidos() {
+
+        List<PlanoDeEnsino> planosSubmetidos = new ArrayList<>();
+
+
+
+        for (PlanoDeEnsino plano : this.planosDeEnsino.values()) {
+
+            if (plano.getStatus() == StatusPlano.EM_REVISAO) {
+
+                planosSubmetidos.add(plano);
+
+            }
+
+        }
+
+        return planosSubmetidos;
+
+    }
+
+
+
+    public List<PlanoDeEnsino> buscarPlanosPorProfessor(int idProfessor) {
+
+        List<PlanoDeEnsino> planosDoProfessor = new ArrayList<>();
+
+        for (PlanoDeEnsino plano : this.planosDeEnsino.values()) {
+
+            if (plano.getIdProfessor() == idProfessor) {
+
+                planosDoProfessor.add(plano);
+
+            }
+
+        }
+
+        return planosDoProfessor;
+
+    }
+
+
+
+    public List<PlanoDeEnsino> buscarPlanosAprovadosPorAluno(int idAluno) {
+
+        List<PlanoDeEnsino> planosAprovados = new ArrayList<>();
+
+
+
+        for (PlanoDeEnsino plano : this.planosDeEnsino.values()) {
+
+            if (plano.getStatus() == StatusPlano.APROVADO) {
+
+                planosAprovados.add(plano);
+
+            }
+
+        }
+
+        return planosAprovados;
+
     }
 }

@@ -15,7 +15,7 @@ public class CadastrarUsuarioView {
     public void exibirTelaCadastro() {
         System.out.println("===== CADASTRO DE USUÁRIO =====");
 
-        System.out.print("Matrícula (insira 8 dígitos!): ");
+        System.out.print("Matrícula (insira 6 dígitos!): ");
         String matricula = scanner.nextLine();
 
         System.out.print("Nome completo: ");

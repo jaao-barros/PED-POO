@@ -39,7 +39,7 @@ public class CriarPlanoView {
         System.out.println("Justificativa:");
         String justificativa = scanner.nextLine();
 
-        System.out.println("Justificativa:");
+        System.out.println("Ementa:");
         String ementa = scanner.nextLine();
 
         System.out.println("Objetivos gerais:");

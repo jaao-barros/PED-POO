@@ -1,15 +1,11 @@
 package view;
 
 import model.PerfilUsuario;
-//oi
 import java.util.Scanner;
 
-public class MenuView {
-
-    private final Scanner scanner; // Para ler a entrada do usuário
-
+public class MenuView implements Observer {
     public MenuView() {
-        this.scanner = new Scanner(System.in);
+        super();
     }
 
     public void exibirBoasVindas(String nomeUsuario, PerfilUsuario perfil) {
@@ -53,6 +49,7 @@ public class MenuView {
     }
 
     public int lerOpcao() {
+        Scanner scanner = new Scanner(System.in);
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
@@ -60,7 +57,8 @@ public class MenuView {
         }
     }
 
-    public void fecharScanner() {
-        scanner.close();
+    @Override
+    public void update() {
+
     }
 }

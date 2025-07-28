@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import controller.CadastrarUsuarioController;
 
-public class CadastrarUsuarioView {
+public class CadastrarUsuarioView implements Observer {
     private final CadastrarUsuarioController controller;
     private Scanner scanner = new Scanner(System.in);
 
@@ -34,5 +34,10 @@ public class CadastrarUsuarioView {
         } catch (IllegalArgumentException e) {
             System.out.println("Erro no cadastro: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void update() {
+
     }
 }

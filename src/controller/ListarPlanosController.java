@@ -33,7 +33,7 @@ public class ListarPlanosController {
         } else if ("ALUNO".equals(tipoPerfil)) {
             return model.buscarPlanosAprovadosPorAluno(usuarioLogado.getId());
         } else if ("COORDENADOR".equals(tipoPerfil)) {
-            return model.buscarTodosPlanosSubmetidos();
+            return model.buscarTodosPlanosCoordenador();
         }
         return List.of();
     }

@@ -20,7 +20,6 @@ public class MenuController {
         this.usuarioLogado = model.getUsuarioLogado();
     }
 
-    //oi
     public void iniciar() {
 
         if (usuarioLogado == null) {
@@ -45,11 +44,6 @@ public class MenuController {
 
 
         } while (opcao != 0);
-
-
-        menuView.fecharScanner();
-        menuView.exibirMensagem("Saindo do sistema. Obrigado!");
-        System.exit(0);
     }
 
 
@@ -114,8 +108,6 @@ public class MenuController {
             case 3:
                 System.exit(0);
                 break;
-            case 0:
-                break;
             default:
                 menuView.exibirOpcaoInvalida();
                 break;
@@ -139,8 +131,6 @@ public class MenuController {
                 break;
             case 4:
                 System.exit(0);
-                break;
-            case 0:
                 break;
             default:
                 menuView.exibirOpcaoInvalida();

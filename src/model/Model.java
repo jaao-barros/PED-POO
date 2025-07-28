@@ -411,7 +411,7 @@ public class Model {
 
             plano.setStatus(StatusPlano.REPROVADO);
 
-            plano.setJustificativa(justificativa);
+            plano.setJustificativaReprovacao(justificativa);
 
             plano.setDataUltimaModificacao(LocalDateTime.now());
 
@@ -485,7 +485,7 @@ public class Model {
 
 
 
-    public List<PlanoDeEnsino> buscarTodosPlanosSubmetidos() {
+    public List<PlanoDeEnsino> buscarTodosPlanosCoordenador() {
 
         List<PlanoDeEnsino> planosSubmetidos = new ArrayList<>();
 
@@ -493,7 +493,7 @@ public class Model {
 
         for (PlanoDeEnsino plano : this.planosDeEnsino.values()) {
 
-            if (plano.getStatus() == StatusPlano.EM_REVISAO) {
+            if (plano.getStatus() == StatusPlano.EM_REVISAO || plano.getStatus() == StatusPlano.APROVADO) {
 
                 planosSubmetidos.add(plano);
 

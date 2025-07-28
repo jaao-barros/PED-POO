@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import controller.EditarPlanoController;
 
-public class EditarPlanoView {
+public class EditarPlanoView implements Observer {
     private final EditarPlanoController controller;
 
     public EditarPlanoView(EditarPlanoController controller) {
@@ -272,5 +272,10 @@ public class EditarPlanoView {
         novoValor = scanner.nextLine();
 
         return novoValor;
+    }
+
+    @Override
+    public void update() {
+
     }
 }

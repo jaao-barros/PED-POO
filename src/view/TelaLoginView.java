@@ -6,15 +6,15 @@ import controller.TelaLoginController;
 import model.PerfilUsuario;
 import model.Usuario;
 
-public class TelaLoginView {
+public class TelaLoginView implements Observer {
     private final TelaLoginController controller;
-    private Scanner scanner = new Scanner(System.in);
 
     public TelaLoginView(TelaLoginController controller) {
         this.controller = controller;
     }
 
     public void exibirTelaLogin() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("=-=-= TELA DE LOGIN =-=-=");
 
         System.out.print("Matrícula: ");
@@ -35,5 +35,10 @@ public class TelaLoginView {
         } catch (IllegalArgumentException e) {
             System.out.println("Erro no login: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void update() {
+
     }
 }

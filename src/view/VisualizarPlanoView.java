@@ -8,7 +8,7 @@ import model.PerfilUsuario;
 import model.PlanoDeEnsino;
 import model.StatusPlano;
 
-public class VisualizarPlanoView {
+public class VisualizarPlanoView implements Observer {
     private final VisualizarPlanoController controller;
     private final PerfilUsuario perfil;
 
@@ -112,5 +112,10 @@ public class VisualizarPlanoView {
 
         System.out.print("\nPressione ENTER para voltar");
         scanner.nextLine();
+    }
+
+    @Override
+    public void update() {
+
     }
 }

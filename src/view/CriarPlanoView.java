@@ -6,7 +6,7 @@ import controller.CriarPlanoController;
 import model.Disciplina;
 import model.PlanoDeEnsino;
 
-public class CriarPlanoView {
+public class CriarPlanoView implements Observer {
     private final CriarPlanoController controller;
     private Scanner scanner = new Scanner(System.in);
 
@@ -103,5 +103,10 @@ public class CriarPlanoView {
         controller.gerarPlano(ano, semestre, justificativa, ementa, objetivosGerais, objetivosEspecificos, metodologia, avaliacao, bibliografiaBasica, bibliografiaComplementar, idDisciplina);
 
         System.out.println("\nPlano criado com sucesso!");
+    }
+
+    @Override
+    public void update() {
+
     }
 }

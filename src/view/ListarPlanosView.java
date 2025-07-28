@@ -9,7 +9,7 @@ import model.StatusPlano;
 import model.PerfilUsuario;
 import model.Usuario;
 
-public class ListarPlanosView {
+public class ListarPlanosView implements Observer {
     private final ListarPlanosController controller;
     private Scanner scanner = new Scanner(System.in);
 
@@ -33,7 +33,7 @@ public class ListarPlanosView {
             for (int i = 0; i < planos.size(); i++) {
                 StatusPlano status = planos.get(i).getStatus();
                 String statusTexto = (status != null) ? status.toString() : "DESCONHECIDO";
-                System.out.println((i + 1) + ". " + planos.get(i).getIdDisciplina() + " (Status: " + statusTexto + ")");
+                System.out.println((i + 1) + ". " + controller.getDisciplinaPorPlano(planos.get(i).getIdDisciplina()).getNome() + " (Status: " + statusTexto + ")");
             }
         }
 
@@ -94,6 +94,7 @@ public class ListarPlanosView {
                     } else {
                         System.out.print("Selecione o número do plano: ");
                         int indice = scanner.nextInt() - 1;
+                        scanner.nextLine();
                         if (indice >= 0 && indice < planos.size()) {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.APROVADO) {
@@ -124,6 +125,7 @@ public class ListarPlanosView {
                     } else {
                         System.out.print("Selecione o número do plano: ");
                         int indice = scanner.nextInt() - 1;
+                        scanner.nextLine();
                         if (indice >= 0 && indice < planos.size()) {
                             PlanoDeEnsino plano = planos.get(indice);
                             controller.visualizarPlano(plano);
@@ -138,6 +140,7 @@ public class ListarPlanosView {
                     } else {
                         System.out.print("Selecione o número do plano: ");
                         int indice = scanner.nextInt() - 1;
+                        scanner.nextLine();
                         if (indice >= 0 && indice < planos.size()) {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.PENDENTE || plano.getStatus() == StatusPlano.REPROVADO) {
@@ -156,6 +159,7 @@ public class ListarPlanosView {
                     } else {
                         System.out.print("Selecione o número do plano: ");
                         int indice = scanner.nextInt() - 1;
+                        scanner.nextLine();
                         if (indice >= 0 && indice < planos.size()) {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.PENDENTE || plano.getStatus() == StatusPlano.REPROVADO) {
@@ -187,6 +191,7 @@ public class ListarPlanosView {
                     } else {
                         System.out.print("Selecione o número do plano: ");
                         int indice = scanner.nextInt() - 1;
+                        scanner.nextLine();
                         if (indice >= 0 && indice < planos.size()) {
                             PlanoDeEnsino plano = planos.get(indice);
                             controller.visualizarPlano(plano);
@@ -201,6 +206,7 @@ public class ListarPlanosView {
                     } else {
                         System.out.print("Selecione o número do plano: ");
                         int indice = scanner.nextInt() - 1;
+                        scanner.nextLine();
                         if (indice >= 0 && indice < planos.size()) {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.EM_REVISAO) {
@@ -220,6 +226,7 @@ public class ListarPlanosView {
                     } else {
                         System.out.print("Selecione o número do plano: ");
                         int indice = scanner.nextInt() - 1;
+                        scanner.nextLine();
                         if (indice >= 0 && indice < planos.size()) {
                             PlanoDeEnsino plano = planos.get(indice);
                             if (plano.getStatus() == StatusPlano.EM_REVISAO) {
@@ -246,5 +253,10 @@ public class ListarPlanosView {
                     System.out.println("Opção inválida.");
             }
         }
+    }
+
+    @Override
+    public void update() {
+
     }
 }
